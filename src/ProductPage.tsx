@@ -8,6 +8,7 @@ export default function Products(){
       <>
       <Showcase
         key={index}
+        img={prod.img}
         title={prod.title}
         link={prod.link}
         brand={prod.brand}
@@ -17,7 +18,7 @@ export default function Products(){
   });
   return (
     <>
-    <Header />
+   
     <div className="showcase-container">
       {elements}
     </div>
