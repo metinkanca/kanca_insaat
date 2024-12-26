@@ -4,6 +4,7 @@ const products = [
         title: 'Isi Pompalari',
         link:['https://www.daiwa.com.tr/urun/dw-14-isi-pompasi/','https://www.baymak.com.tr/urunler/yenilenebilir-enerji-sistemleri/isi-pompalari/iotherm-hava-kaynakli-monoblok-inverter-isi-pompasi'],
         brand: ['Daiwa','Baymak'],
+        img: ['./images/daiwa_isi_pompasi.webp'],
     },
 
     {

@@ -1,32 +1,28 @@
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useState } from 'react';
 import Showcase from './Showcase';
-import products from './products.js';
 import Header from './Header.tsx';
+import Home from './Home.tsx';
 import './App.css';
-
+import Products from './ProductPage.tsx';
 function App() {
-  const elements = products.map((prod, index) => {
-    return (
-      <>
-      <Showcase
-        key={index}
-        title={prod.title}
-        link={prod.link}
-        brand={prod.brand}
-      />
-      </>
-    );
-  });
+  return(
+    <Router>
+      <Header />
+      <nav>
+        <Link to="/">Ana Sayfa</Link>
+        <Link to="/products">Ürünler</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+      </Routes>
+    </Router>
+  )
 
-  return (
-    <>
-      <Header/>
-      <main>
-        {<img className="main_image" src="./images/kanca_insaat.jpg"></img>}
-        {elements}
-      </main>
-    </>
-  );
+
 }
+
+
 
 export default App;

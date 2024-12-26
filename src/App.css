@@ -9,7 +9,7 @@ html,body{
 }
 header{
   width: 100%;
-  height: 180px;
+  height: 140px;
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -18,9 +18,9 @@ header{
   color: white;
 }
 .header_logo{
-  width: 150px;
-  height: 150px;
-  padding-left: 20px;
+  width: 124px;
+  height: 130px;
+  padding-left: 80px;
 }
 .brandName{
   font-size: 25px;
@@ -28,8 +28,9 @@ header{
 }
 
 .main_image{
-  margin-top: 180px;
+  margin-top: 140px;
   width: 100%;
+  height: 600px;
 }
 
 .dropbtn {
