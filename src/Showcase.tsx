@@ -15,12 +15,18 @@ export default function Showcase(props) {
             }}>
                 <h1 className="product-name">{props.title}</h1>
             </div>
-            {showElements && <div className="showcase-container">{props.link.map((link, index) => (
-                
-                <a href={link} key={index}>
-                    <span className="brand-name">{props.brand[index]}</span>
-                </a>
-            ))}</div>}</div>
+            {showElements && (
+                <div className="showcase-container">
+                    {props.link.map((link, index) => (
+                    <div key={index} className="brand-wrapper">
+                        <a href={link}>
+                            <span className="brand-name">{props.brand[index]}</span>
+                        </a>
+                    </div>
+                    ))}
+            </div>
+            )}
+            </div>
         </div>
     );
 }

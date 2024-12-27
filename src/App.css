@@ -45,12 +45,16 @@ header {
   color: white;
   text-shadow: 0px 0px 20px black;
   
-}
-.brand-name{
-  font-size: 25px;
-  margin-left: 20px;
+}.brand-wrapper {
+  width: 100%; /* Full width for alignment under the image */
+  text-align: center; /* Centers brand names */
 }
 
+.brand-name {
+  font-size: 14px; /* Adjust font size for better fit */
+  word-wrap: break-word; /* Ensures long brand names wrap within container */
+  display: inline-block; /* Prevents overflowing content */
+}
 .main_image{
   width: 100%;
   height: 600px;
@@ -92,8 +96,8 @@ header {
 
 .dropdown:hover .dropbtn {background-color: rgb(77, 77, 77);}
 
-.showcase-container{
-    display: grid;
-    grid-template-columns: repeat(5, 300px);
-    row-gap: 50px;
+.showcase-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 items per row */
+  gap: 20px; /* Spacing between grid items */
 }
