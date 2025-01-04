@@ -9,10 +9,6 @@ function App() {
   return(
     <Router>
       <Header />
-      <nav>
-        <Link to="/">Ana Sayfa</Link>
-        <Link to="/products">Ürünler</Link>
-      </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
