@@ -18,7 +18,7 @@ export default function Products(){
   });
   return (
     <>
-    <div className="prod-pag"><p className="products-page-title">ÜRÜNLER</p></div>
+    <div className="page-title"><p className="products-page-title">ÜRÜNLER</p></div>
     <div className="showcase-container">
       {elements}
     </div>

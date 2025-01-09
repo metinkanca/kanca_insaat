@@ -5,6 +5,9 @@ import Header from './Header.tsx';
 import Home from './Home.tsx';
 import './App.css';
 import Products from './ProductPage.tsx';
+import About from './About.tsx';
+import Footer from './Footer.tsx';
+import Dealers from './Dealers.tsx';
 function App() {
   return(
     <Router>
@@ -12,7 +15,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/about" element={<About />} />
       </Routes>
+      <Dealers />
+      <Footer />
     </Router>
   )
 
