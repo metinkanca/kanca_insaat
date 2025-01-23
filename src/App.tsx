@@ -17,8 +17,10 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      <div className='end-of-page'>
       <Dealers />
       <Footer />
+      </div>
     </Router>
   )
 

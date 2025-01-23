@@ -4,7 +4,6 @@ type DealerSliderProps ={
     dealerUrls: string[]
 }
 export default function dealerSlider({ dealerUrls }: DealerSliderProps){
-    const [dealerIndex,setdealerIndex] = useState(0)
 
     return (
         <div style={{width: "100%", height: "100%", position: "relative"}}>

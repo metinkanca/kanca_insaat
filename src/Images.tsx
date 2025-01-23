@@ -6,6 +6,6 @@ import kombi from "../images/main_page_slider_images/eca_kombi.png"
 const images = [kombi,daiwa]
 
 export default function Images(){
-    return <div style={{maxWidth: "500px",width: "100%",height: "500px"}}><ImageSlider imageUrls={images}/>
+    return <div style={{maxWidth: "400px",width: "100%",height: "400px",marginRight: "30px"}}><ImageSlider imageUrls={images}/>
     </div>
 }

@@ -16,7 +16,7 @@ export default function Showcase(props) {
                 <h1 className="product-name">{props.title}</h1>
             </div>
             {showElements && (
-                <div className="showcase-container">
+                <div className="brand-container">
                     {props.link.map((link, index) => (
                     <div key={index} className="brand-wrapper">
                         <a href={link}>

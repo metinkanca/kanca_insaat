@@ -81,7 +81,7 @@ const products = [
         title: 'Sirkülasyon Pompalari',
         link:['https://www.baymak.com.tr/urunler/su-teknolojileri/sirkulasyon-pompalari'],
         brand: ['Baymak'],
-        img: ['./images/products_page_images/baymak_isi_pompasi.jpg'],
+        img: ['./images/products_page_images/baymak_sirkulasyon_pompasi.png'],
     },
 
     {
