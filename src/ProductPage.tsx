@@ -1,13 +1,13 @@
-import Showcase from "./Showcase.js";
+import Showcase from "./Showcase.tsx";
 import products from "./products"
 import Header from "./Header.js";
 export default function Products(){
     
-  const elements = products.map((prod, index) => {
+  const elements = products.map((prod) => {
     return (
       <>
       <Showcase
-        key={index}
+        id={prod.id}
         img={prod.img}
         title={prod.title}
         link={prod.link}

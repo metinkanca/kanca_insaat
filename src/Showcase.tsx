@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 export default function Showcase(props) {
     const [showElements,setShowElements] = useState(false);
     return (
@@ -18,10 +19,10 @@ export default function Showcase(props) {
             {showElements && (
                 <div className="brand-container">
                     {props.link.map((link, index) => (
-                    <div key={index} className="brand-wrapper">
-                        <a href={link}>
+                    <div key={props.id} className="brand-wrapper">
+                        <Link to ={`/detailspage/${props.id}`}>
                             <span className="brand-name">{props.brand[index]}</span>
-                        </a>
+                        </Link>
                     </div>
                     ))}
             </div>

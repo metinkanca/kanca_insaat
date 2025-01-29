@@ -8,6 +8,7 @@ import Products from './ProductPage.tsx';
 import About from './About.tsx';
 import Footer from './Footer.tsx';
 import Dealers from './Dealers.tsx';
+import DetailsPage from './DetailsPage.tsx';
 function App() {
   return(
     <Router>
@@ -16,6 +17,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
+        <Route path="/detailspage" element={<DetailsPage />} />
+        <Route path="/detailspage/:id" element={<DetailsPage />} />
       </Routes>
       <div className='end-of-page'>
       <Dealers />
