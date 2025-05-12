@@ -5,8 +5,9 @@ const products = [
         title: 'Isi Pompalari',
         link:['https://www.daiwa.com.tr/urun/dw-14-isi-pompasi/','https://www.baymak.com.tr/urunler/yenilenebilir-enerji-sistemleri/isi-pompalari/iotherm-hava-kaynakli-monoblok-inverter-isi-pompasi'],
         brand: ['Daiwa','Baymak'],
-        urlCode: ['daiwa_isi_pompasi','baymak_isi_pompasi'],
+        productType: 'isi_pompasi',
         img: ['./images/products_page_images/baymak_isi_pompasi.jpg'],
+        brandImg: ['./images/daiwa_logo.png','./images/baymak_logo.png'],
     },
 
     {
@@ -14,7 +15,9 @@ const products = [
         title: 'Pelet Kazanlari',
         link:['https://www.daiwa.com.tr/projects/pelet-kazanlari/'],
         brand: ['Daiwa'],
+        productType: 'pelet_kazani',
         img: ['./images/products_page_images/daiwa_pelet_kazani.png'],
+        brandImg: ['./images/daiwa_logo.png'],
     },
 
     {
@@ -22,7 +25,9 @@ const products = [
         title: 'Kaloriferli Pelet Sobalari',
         link:['https://www.daiwa.com.tr/projects/pelet-kazanlari/'],
         brand: ['Daiwa'],
+        productType: 'kaloriferli_pelet_sobasi',
         img: ['./images/products_page_images/daiwa_kaloriferli_pelet_sobasi.png'],
+        brandImg: ['./images/daiwa_logo.png'],
     },
 
     {
@@ -30,7 +35,9 @@ const products = [
         title: 'Uflemeli Pelet Sobalari',
         link:['https://www.daiwa.com.tr/projects/uflemeli-pelet-sobasi/'],
         brand: ['Daiwa'],
+        productType: 'uflemeli_pelet_sobasi',
         img: ['./images/products_page_images/daiwa_uflemeli_pelet_sobasi.png'],
+        brandImg: ['./images/daiwa_logo.png'],
     },
     
     {
@@ -38,7 +45,9 @@ const products = [
         title: 'Kati Yakitli Kalorifer Sobalari',
         link:['https://www.daiwa.com.tr/projects/kati-yakitli-kalorifer-sobalari/'],
         brand: ['Daiwa'],
+        productType: 'kati_yakitli_kalorifer_sobasi',
         img: ['./images/products_page_images/daiwa_kati_yakitli_kalorifer_sobasi.png'],
+        brandImg: ['./images/daiwa_logo.png'],
     },
     
     {
@@ -46,7 +55,9 @@ const products = [
         title: 'Kati Yakitli Kazanlari',
         link:['https://www.daiwa.com.tr/projects/kati-yakit-kazani/'],
         brand: ['Daiwa'],
+        productType: 'kati_yakitli_kazan',
         img: ['./images/products_page_images/daiwa_kati_yakitli_kazan.png'],
+        brandImg: ['./images/daiwa_logo.png'],
     },
     
     {
@@ -54,7 +65,9 @@ const products = [
         title: 'Kati Yakitli Sobalari',
         link:['https://www.daiwa.com.tr/projects/kati-yakit-sobasi/'],
         brand: ['Daiwa'],
+        productType: 'kati_yakitli_soba',
         img: ['./images/products_page_images/daiwa_kati_yakitli_soba.png'],
+        brandImg: ['./images/daiwa_logo.png'],
     },
     
     {
@@ -62,7 +75,9 @@ const products = [
         title: 'Boyler',
         link:['https://www.baymak.com.tr/urunler/su-isiticilari/boylerler'],
         brand: ['Baymak'],
+        productType: 'boyler',
         img: ['./images/products_page_images/baymak_boyler.png'],
+        brandImg: ['./images/baymak_logo.png'],
     },
     
     {
@@ -70,7 +85,9 @@ const products = [
         title: 'Termoboyler',
         link:['https://www.baymak.com.tr/urunler/su-isiticilari/termoboylerler/aqua-termoboyler'],
         brand: ['Baymak'],
+        productType: 'termoboyler',
         img: ['./images/products_page_images/baymak_termoboyler.png'],
+        brandImg: ['./images/baymak_logo.png'],
     },
     
     {
@@ -78,7 +95,9 @@ const products = [
         title: 'Buffer Tanklari',
         link:['https://www.baymak.com.tr/urunler/su-isiticilari/boylerler/aqua-buffer-tanki'],
         brand: ['Baymak'],
+        productType: 'buffer_tanki',
         img: ['./images/products_page_images/baymak_buffer_tank.png'],
+        brandImg: ['./images/baymak_logo.png'],
     },
 
     {
@@ -86,7 +105,9 @@ const products = [
         title: 'Elektrikli Termosifonlar',
         link:['https://www.baymak.com.tr/urunler/su-isiticilari/termosifonlar'],
         brand: ['Baymak'],
+        productType: 'elektrikli_termosifon',
         img: ['./images/products_page_images/baymak_elektrikli_termosifon.png'],
+        brandImg: ['./images/baymak_logo.png'],
     },
     
     {
@@ -94,7 +115,9 @@ const products = [
         title: 'Sirkülasyon Pompalari',
         link:['https://www.baymak.com.tr/urunler/su-teknolojileri/sirkulasyon-pompalari'],
         brand: ['Baymak'],
+        productType: 'sirkulasyon_pompasi',
         img: ['./images/products_page_images/baymak_sirkulasyon_pompasi.png'],
+        brandImg: ['./images/baymak_logo.png'],
     },
 
     {
@@ -102,7 +125,9 @@ const products = [
         title: 'Kombiler',
         link:['https://eca.com.tr/yogusmali','https://www.baymak.com.tr/kombi','https://termoteknik.com/bireysel-isitma-sistemleri-kombiler/','https://www.demirdokum.com.tr/urunler/kombiler/'],
         brand: ['E.C.A','Baymak','Termoteknik','Demirdöküm'],
+        productType: 'kombi',
         img: ['./images/products_page_images/eca_kombi.png'],
+        brandImg: ['./images/eca_logo.png','./images/baymak_logo.png','./images/termoteknik_logo.png','./images/demirdokum_logo.png'],
     },
 
 

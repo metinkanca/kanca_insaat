@@ -1,5 +1,5 @@
 import Showcase from "./Showcase.tsx";
-import products from "./products"
+import products from "./products.js"
 import Header from "./Header.js";
 export default function Products(){
     
@@ -12,6 +12,8 @@ export default function Products(){
         title={prod.title}
         link={prod.link}
         brand={prod.brand}
+        productType={prod.productType}
+        brandImg={prod.brandImg}
       />
       </>
     );

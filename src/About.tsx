@@ -3,10 +3,15 @@ export default function About(){
         <>
         <div className="page-title"><p className="products-page-title">HAKKIMIZDA</p></div>
         <div className='about-page'>
-        <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel tortor sed augue maximus commodo. Aliquam eget lacinia ligula. Sed vitae pharetra est. Donec dui enim, egestas ac efficitur pulvinar, aliquet in nisi. Praesent porta tempor semper. Proin ornare at tortor quis accumsan. Phasellus quis felis quam.
-            Cras eleifend sapien justo, et ullamcorper tortor ullamcorper quis. In sed ipsum eget urna consequat imperdiet sit amet vitae metus. Praesent vehicula, nulla ut efficitur consectetur, leo eros iaculis enim, et condimentum metus nisl at tortor. Cras maximus porttitor cursus. Curabitur molestie condimentum dolor, nec ornare ligula mollis non. Nam aliquam varius orci, vitae luctus lectus placerat aliquet. Aliquam erat volutpat. Fusce ac tincidunt augue, at eleifend magna. Sed ac metus justo. Sed volutpat risus vel eros lacinia faucibus. Nam venenatis fringilla lacus vel tristique. Nam non lectus quis nunc luctus varius.
-        </span>
+        <p>
+            Kanca İnşaat olarak, 1991 yılından bu yana Trabzon'da inşaat ve yapı malzemeleri alanında faaliyet gösteriyoruz. Kurulduğumuz günden bu yana, kaliteli ürün anlayışımız ve güvenilir hizmet yaklaşımımızla bölge halkının ve sektörün ihtiyaçlarına çözüm sunmaya devam ediyoruz.
+        </p>
+        <p>
+            İnşaat sektöründeki deneyimimizle, sadece malzeme tedarik eden bir firma olmanın ötesine geçiyor; projelerinize değer katacak ürün ve hizmetleri en doğru şekilde sunmayı amaçlıyoruz. Müşteri memnuniyetini işimizin merkezine koyuyor, her işimizi titizlikle ve özenle yürütüyoruz.
+        </p>
+        <p>
+            Kanca İnşaat, yerel değerlere bağlı bir aile şirketi olarak, Trabzon’un gelişimine katkı sağlamaktan ve uzun soluklu iş birliklerine imza atmaktan gurur duyar. Geçmişten gelen bilgi birikimimizle, bugünü güçlendiriyor; yarının yapılarına sağlam temeller atıyoruz.
+        </p>
         </div>
         </>
     )

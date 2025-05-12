@@ -9,6 +9,7 @@ import About from './About.tsx';
 import Footer from './Footer.tsx';
 import Dealers from './Dealers.tsx';
 import DetailsPage from './DetailsPage.tsx';
+import BrandPage from './BrandPage.tsx';
 function App() {
   return(
     <Router>
@@ -18,7 +19,8 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/detailspage" element={<DetailsPage />} />
-        <Route path="/detailspage/:id" element={<DetailsPage />} />
+        <Route path="/detailspage/:productType/:brand/:productCode" element={<DetailsPage />} />
+        <Route path='/brandpage/:productType/:brand' element={<BrandPage />} />
       </Routes>
       <div className='end-of-page'>
       <Dealers />

@@ -4,9 +4,9 @@ export default function Header(){
         <header>
             <div className='header_kanca'>
             <Link to = "/">
-            <img className="header_logo"  src="../images/kanca-1.png"></img>
+            <img className="header_logo"  src="/images/kanca-1.png"></img>
             </Link>
-            <h1 className='header_company'>Kanca</h1>
+            <h1 className='header_company'></h1>
             </div>
             <div className="dropdown">
             <Link to = "/products">

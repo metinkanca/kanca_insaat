@@ -2,7 +2,7 @@ body{
   max-width: 960px;
   margin: auto;
   margin-top: 90px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: Roboto;
   background-color: rgb(231, 231, 231);
 }
 
@@ -31,7 +31,7 @@ header {
   user-select: none;
 }
 .header_logo{
-  width: 80px;
+  width: 150px;
   height: 80px;
   margin-left: 80px;
 }
@@ -52,7 +52,7 @@ header {
   margin-left: 300px;
   color: rgb(255, 255, 255);
   font-weight: bold;
-  text-shadow: 0px 0px 5px #313149;
+  text-shadow: 0px 0px 3px #000000;
 }
 
 .product-tab{
@@ -76,18 +76,8 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: end;
-
-  cursor: pointer;
 }
-/*
-.blur{
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 1;
-}*/
+
 
 .product-name{
   position: relative;
@@ -103,18 +93,22 @@ header {
   background-color: rgb(26, 26, 26);
 }
 
-.brand-name {
+.brand-name {/*
   position: relative;
   font-size: 14px; 
   word-wrap: break-word; 
   display: inline-block;
-  padding-left: 5px;
+  padding-left: 5px;*/
+  object-fit:fill;
+  height: 20px;
+  width: 70px;
 }
 
 .main_image{
   width: 155%;
-  height: 400px;
+  height: 650px;
   margin-left: -249px;
+  display: block;
 }
 
 .dropbtn {
@@ -163,9 +157,13 @@ header {
     width: 100%;
     padding-top: 100px;
   }
-.brand-container{
+  .brand-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* centers the items horizontally */
+    align-items: center;
+    gap: 20px; /* adds space between brand-wrapper elements */
+    flex-wrap: wrap; /* allows wrapping if there are many items */
+    margin-top: 10px;
   }
 
 footer{
@@ -183,7 +181,9 @@ footer > p{
 }
 
 .about-page{
+  text-align: center;
   padding-top: 150px;
+  font-size: 20px;
 }
 
 .main_page_products{
@@ -224,7 +224,7 @@ footer > p{
 }
 .img_product_wrapper{
   display: flex;
-  align-items: center;
+
 }
 .img_product_wrapper > span,
 .img_product_wrapper > a{
@@ -318,20 +318,23 @@ footer > p{
   width: 480px;
   margin: 0;
   font-weight: lighter;
-  background-color: rgb(26, 26, 26);
+  background-color: rgb(255, 82, 82);
   color: white;
+  font-size: 25px;
+  border-top-right-radius: 20px;
 }
 
 
 .list-wrapper{
-  font-size: 15px;
+  font-size: 12px;
 /*line-height: 35px;
   margin-top: 25px;
   margin-left: 20px;
   margin-right: 20px;*/
   display: flex;
   flex-direction: column;
-  height: 100%;
+
+  height: 555px;
 }
 /*
 .list-wrapper > ul{
@@ -347,7 +350,7 @@ footer > p{
   display: flex;
   justify-content: center;
   font-weight: lighter;
-  background-color: rgb(69, 68, 68);
+  background-color: rgb(251, 122, 122);
   color: rgb(255, 255, 255);
 }
 
@@ -355,7 +358,7 @@ footer > p{
   color: white;
   margin: 0;
   padding: 0;
-  background-color: grey;
+  background-color: rgb(26, 26, 26);
   display: flex;
   width: 480px;
   justify-content: space-around;
@@ -381,6 +384,78 @@ footer > p{
 }
 
 .details-img{
-  width: 513px;
+  width: 475px;
+  height: 475px;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  object-fit: contain;
+}
+.details-info{
+
+    display: flex;
+    flex-direction: column;
   height: 555px;
+}
+
+.brand-product-container{
+  position: relative;
+  padding-top: 150px;
+  width: 300px;
+  height: auto;
+  display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.brand-product-img{
+  position: relative;
+  width: 300px;
+  height: 300px;
+  object-fit:cover;
+}
+.brand-product-text{
+  width: auto;
+  margin: 0;
+  color: white;
+  text-shadow: 0px 0px 4px black;
+}
+
+.popular-pages{
+  margin-top: 20px;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  gap: 25px;
+}
+
+.popular-pages img{
+  display: block;
+}
+
+.popular-pages a{
+  text-decoration: none;
+}
+
+.popular-name{
+  height: 30px;
+  margin: 0;
+  background-color: black;
+  color: white;
+  line-height: 30px;
+  text-align: center;
+}
+
+.mini-title{
+  height: 50px;
+  line-height: 50px;
+  margin: 0;
+  background-color: rgb(255, 82, 82);
+  color: white;
+  width: 100%;
 }
