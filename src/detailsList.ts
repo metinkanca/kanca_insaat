@@ -1,9 +1,9 @@
 
 const detailsList:{
     id: number;
-    productType: string;// ürünün türü
-    productCode: string[]; // son sayfa için ürünün asıl adı dp40 gibi
-    productName: string[]; // son sayfada gösterilen başlık adı
+    productType: string;
+    productCode: string[]; 
+    productName: string[]; 
     depth: string;
     width: string;
     height: string;
