@@ -5,7 +5,7 @@ export default function DetailsPage(){
     const {productType, brand, productCode} = useParams();
     const infoPage = detailsList.find(item => item.productType === productType && item.brand.includes(brand) && item.productCode.includes(productCode));
         return(
-            <>
+            <div>
             {infoPage && (
             <DetailsShowcase 
                 key={infoPage.id}
@@ -22,7 +22,7 @@ export default function DetailsPage(){
                 brand={infoPage.brand}
                 img={infoPage.img[infoPage.brand.indexOf(brand)]}
             />)}
-            </>
+            </div>
         );
     
 }

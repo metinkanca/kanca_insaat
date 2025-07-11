@@ -1,6 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { useState } from 'react';
-import Showcase from './Showcase';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Header from './Header.tsx';
 import Home from './Home.tsx';
 import './App.css';

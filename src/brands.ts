@@ -1,7 +1,7 @@
 const brands :{
     productName: string;
-    productType: string;// ürünün türü
-    productCode: string[]; // son sayfa için ürünün asıl adı dp40 gibi
+    productType: string;
+    productCode: string[];
     brand: string[];
     img: string[];
 }[]

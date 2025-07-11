@@ -1,4 +1,4 @@
-import dp30 from "/images/brands_page_images/kaloriferli_pelet_sobalari/DP-30.jpg"
+
 import { Link } from 'react-router-dom'
 export default function PopularProduct(){
 
@@ -21,4 +21,4 @@ return(
     </div>
     </>
 )
-}
+}   

@@ -2,7 +2,7 @@
 const products = [
     {
         id: 0,
-        title: 'Isi Pompalari',
+        title: 'Isı Pompaları',
         link:['https://www.daiwa.com.tr/urun/dw-14-isi-pompasi/','https://www.baymak.com.tr/urunler/yenilenebilir-enerji-sistemleri/isi-pompalari/iotherm-hava-kaynakli-monoblok-inverter-isi-pompasi'],
         brand: ['Daiwa','Baymak'],
         productType: 'isi_pompasi',
@@ -12,7 +12,7 @@ const products = [
 
     {
         id: 1,
-        title: 'Pelet Kazanlari',
+        title: 'Pelet Kazanları',
         link:['https://www.daiwa.com.tr/projects/pelet-kazanlari/'],
         brand: ['Daiwa'],
         productType: 'pelet_kazani',
@@ -22,7 +22,7 @@ const products = [
 
     {
         id: 2,
-        title: 'Kaloriferli Pelet Sobalari',
+        title: 'Kaloriferli Pelet Sobaları',
         link:['https://www.daiwa.com.tr/projects/pelet-kazanlari/'],
         brand: ['Daiwa'],
         productType: 'kaloriferli_pelet_sobasi',
@@ -32,7 +32,7 @@ const products = [
 
     {
         id: 3,
-        title: 'Uflemeli Pelet Sobalari',
+        title: 'Üflemeli Pelet Sobaları',
         link:['https://www.daiwa.com.tr/projects/uflemeli-pelet-sobasi/'],
         brand: ['Daiwa'],
         productType: 'uflemeli_pelet_sobasi',
@@ -42,7 +42,7 @@ const products = [
     
     {
         id: 4,
-        title: 'Kati Yakitli Kalorifer Sobalari',
+        title: 'Katı Yakıtlı Kalorifer Sobaları',
         link:['https://www.daiwa.com.tr/projects/kati-yakitli-kalorifer-sobalari/'],
         brand: ['Daiwa'],
         productType: 'kati_yakitli_kalorifer_sobasi',
@@ -52,7 +52,7 @@ const products = [
     
     {
         id: 5,
-        title: 'Kati Yakitli Kazanlari',
+        title: 'Katı Yakıtlı Kazanları',
         link:['https://www.daiwa.com.tr/projects/kati-yakit-kazani/'],
         brand: ['Daiwa'],
         productType: 'kati_yakitli_kazan',
@@ -62,7 +62,7 @@ const products = [
     
     {
         id: 6,
-        title: 'Kati Yakitli Sobalari',
+        title: 'Katı Yakıtlı Sobaları',
         link:['https://www.daiwa.com.tr/projects/kati-yakit-sobasi/'],
         brand: ['Daiwa'],
         productType: 'kati_yakitli_soba',
@@ -92,7 +92,7 @@ const products = [
     
     {
         id: 9,
-        title: 'Buffer Tanklari',
+        title: 'Buffer Tankları',
         link:['https://www.baymak.com.tr/urunler/su-isiticilari/boylerler/aqua-buffer-tanki'],
         brand: ['Baymak'],
         productType: 'buffer_tanki',
@@ -112,7 +112,7 @@ const products = [
     
     {
         id: 11,
-        title: 'Sirkülasyon Pompalari',
+        title: 'Sirkülasyon Pompaları',
         link:['https://www.baymak.com.tr/urunler/su-teknolojileri/sirkulasyon-pompalari'],
         brand: ['Baymak'],
         productType: 'sirkulasyon_pompasi',

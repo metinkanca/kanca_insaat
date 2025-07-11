@@ -21,9 +21,11 @@ export default function Products(){
   return (
     <>
     <div className="page-title"><p className="products-page-title">ÜRÜNLER</p></div>
+    
     <div className="showcase-container">
       {elements}
     </div>
+
     </>
   );
 }

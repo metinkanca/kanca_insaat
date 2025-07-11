@@ -6,7 +6,7 @@ export default function Header(){
             <Link to = "/">
             <img className="header_logo"  src="/images/kanca-1.png"></img>
             </Link>
-            <h1 className='header_company'></h1>
+            <h1 className='header_company'>KANCA</h1>
             </div>
             <div className="dropdown">
             <Link to = "/products">

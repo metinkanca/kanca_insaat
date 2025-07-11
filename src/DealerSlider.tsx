@@ -1,21 +1,21 @@
-import { useState } from "react"
-import {ArrowBigLeft, ArrowBigRight, Circle, CircleDot} from "lucide-react"
-type DealerSliderProps ={
+
+
+type DealerSliderProps = {
     dealerUrls: string[]
 }
-export default function dealerSlider({ dealerUrls }: DealerSliderProps){
 
+export default function DealerSlider({ dealerUrls }: DealerSliderProps) {
     return (
         <div style={{width: "100%", height: "100%", position: "relative"}}>
-        <div style={{width: "100%", height: "100%", display: "flex"}}>
-            {dealerUrls.map(url => (
-                <img 
-                    key = {url} 
-                    src={url} 
-                    className="dealer-slider-img"
-                />
-            ))}
-        </div>  
-    </div>
+            <div className="dealer-logos-container">
+                {dealerUrls.map(url => (
+                    <img 
+                        key={url} 
+                        src={url} 
+                        className="dealer-slider-img"
+                    />
+                ))}
+            </div>  
+        </div>
     )
 }

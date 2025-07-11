@@ -7,13 +7,12 @@ return (
         <img className="main_image" src="./images/kanca_insaat.jpg"></img>
         <div className="main_page_wrapper">
         <div className="img_product_wrapper">
+          <div className="slider">
         <Images />
-        <div>
+        </div>
+        <div className="popular-tab">
           <h1 className="mini-title">&nbsp;Popüler Ürünler</h1>
           <PopularProduct />
-        </div>
-        <div className="popular-product">
-
         </div>
         </div>
         <div className="google_maps">
