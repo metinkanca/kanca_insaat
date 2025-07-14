@@ -1,6 +1,6 @@
-
 import { Link } from 'react-router-dom'
-export default function Showcase(props :any) {
+
+export default function Showcase(props: any) {
     return (
         <div className="product-tab">
             <div className='full-container'>
@@ -15,7 +15,7 @@ export default function Showcase(props :any) {
                 </div>
 
                 <div className="brand-container">
-                    {props.link.map((link :any, index :number) => (
+                    {props.link.map((linkItem: any, index: number) => (
                     <div key={props.id} className="brand-wrapper">
                         <Link to ={`/brandpage/${props.productType}/${props.brand[index]}`}>
                             <img className="brand-name" src={props.brandImg[index]}></img>

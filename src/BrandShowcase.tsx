@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-
-export default function BrandShowcase(props :any){
+export default function BrandShowcase(props: any){
     return(
         <>
             <div className="page-title">
@@ -9,7 +8,7 @@ export default function BrandShowcase(props :any){
             </div>
             <div className="brand-margin">
                 <div className="brand-product-container">
-                    {props.productCode.map((productCode: any, index: number) => (
+                    {props.productCode.map((code: any, index: number) => (
                         <Link 
                             key={index} 
                             to={`/detailspage/${props.productType}/${props.brand}/${props.productCode[index]}`} 
