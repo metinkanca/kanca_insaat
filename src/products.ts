@@ -16,7 +16,7 @@ const products:{
         brand: ['Daiwa','Baymak'],
         productType: 'isi_pompasi',
         img: ['./images/products_page_images/baymak_isi_pompasi.jpg'],
-        brandImg: ['./images/daiwa_logo.png','./images/baymak_logo.png'],
+        brandImg: ['../images/daiwa_logo.png','../images/baymak_logo.png'],
     },
 
     {
@@ -26,7 +26,7 @@ const products:{
         brand: ['Daiwa'],
         productType: 'pelet_kazani',
         img: ['./images/products_page_images/daiwa_pelet_kazani.png'],
-        brandImg: ['./images/daiwa_logo.png'],
+        brandImg: ['../images/daiwa_logo.png'],
     },
 
     {
@@ -36,7 +36,7 @@ const products:{
         brand: ['Daiwa'],
         productType: 'kaloriferli_pelet_sobasi',
         img: ['./images/products_page_images/daiwa_kaloriferli_pelet_sobasi.png'],
-        brandImg: ['./images/daiwa_logo.png'],
+        brandImg: ['../images/daiwa_logo.png'],
     },
 
     {
@@ -46,7 +46,7 @@ const products:{
         brand: ['Daiwa'],
         productType: 'uflemeli_pelet_sobasi',
         img: ['./images/products_page_images/daiwa_uflemeli_pelet_sobasi.png'],
-        brandImg: ['./images/daiwa_logo.png'],
+        brandImg: ['../images/daiwa_logo.png'],
     },
     
     {
@@ -56,7 +56,7 @@ const products:{
         brand: ['Daiwa'],
         productType: 'kati_yakitli_kalorifer_sobasi',
         img: ['./images/products_page_images/daiwa_kati_yakitli_kalorifer_sobasi.png'],
-        brandImg: ['./images/daiwa_logo.png'],
+        brandImg: ['../images/daiwa_logo.png'],
     },
     
     {
@@ -66,7 +66,7 @@ const products:{
         brand: ['Daiwa'],
         productType: 'kati_yakitli_kazan',
         img: ['./images/products_page_images/daiwa_kati_yakitli_kazan.png'],
-        brandImg: ['./images/daiwa_logo.png'],
+        brandImg: ['../images/daiwa_logo.png'],
     },
     
     {
@@ -76,7 +76,7 @@ const products:{
         brand: ['Daiwa'],
         productType: 'kati_yakitli_soba',
         img: ['./images/products_page_images/daiwa_kati_yakitli_soba.png'],
-        brandImg: ['./images/daiwa_logo.png'],
+        brandImg: ['../images/daiwa_logo.png'],
     },
     
     {
@@ -86,7 +86,7 @@ const products:{
         brand: ['Baymak'],
         productType: 'boyler',
         img: ['./images/products_page_images/baymak_boyler.png'],
-        brandImg: ['./images/baymak_logo.png'],
+        brandImg: ['../images/baymak_logo.png'],
     },
     
     {
@@ -96,7 +96,7 @@ const products:{
         brand: ['Baymak'],
         productType: 'termoboyler',
         img: ['./images/products_page_images/baymak_termoboyler.png'],
-        brandImg: ['./images/baymak_logo.png'],
+        brandImg: ['../images/baymak_logo.png'],
     },
     
     {
@@ -106,7 +106,7 @@ const products:{
         brand: ['Baymak'],
         productType: 'buffer_tanki',
         img: ['./images/products_page_images/baymak_buffer_tank.png'],
-        brandImg: ['./images/baymak_logo.png'],
+        brandImg: ['../images/baymak_logo.png'],
     },
 
     {
@@ -116,7 +116,7 @@ const products:{
         brand: ['Baymak'],
         productType: 'elektrikli_termosifon',
         img: ['./images/products_page_images/baymak_elektrikli_termosifon.png'],
-        brandImg: ['./images/baymak_logo.png'],
+        brandImg: ['../images/baymak_logo.png'],
     },
     
     {
@@ -126,7 +126,7 @@ const products:{
         brand: ['Baymak'],
         productType: 'sirkulasyon_pompasi',
         img: ['./images/products_page_images/baymak_sirkulasyon_pompasi.png'],
-        brandImg: ['./images/baymak_logo.png'],
+        brandImg: ['../images/baymak_logo.png'],
     },
 
     {
@@ -136,7 +136,7 @@ const products:{
         brand: ['E.C.A','Baymak','Termoteknik','Demirdöküm'],
         productType: 'kombi',
         img: ['./images/products_page_images/eca_kombi.png'],
-        brandImg: ['./images/eca_logo.png','./images/baymak_logo.png','./images/termoteknik_logo.png','./images/demirdokum_logo.png'],
+        brandImg: ['../images/eca_logo.png','../images/baymak_logo.png','../images/termoteknik_logo.png','../images/demirdokum_logo.png'],
     },
 
 

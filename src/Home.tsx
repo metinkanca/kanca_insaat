@@ -4,7 +4,7 @@ import PopularProduct from "./PopularProduct";
 export default function Home(){
 return (
     <>
-        <img className="main_image" src="./images/kanca_insaat.jpg"></img>
+        <img className="main_image" src="../images/kanca_insaat.jpg"></img>
         <div className="main_page_wrapper">
         <div className="img_product_wrapper">
           <div className="slider">
