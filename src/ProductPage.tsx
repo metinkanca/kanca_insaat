@@ -1,9 +1,9 @@
 import Showcase from "./Showcase.tsx";
-import products from "./products.js"
-import Header from "./Header.js";
+import products from "./products.ts"
+
 export default function Products(){
     
-  const elements = products.map((prod) => {
+  const elements = products.map((prod :any) => {
     return (
       <>
       <Showcase

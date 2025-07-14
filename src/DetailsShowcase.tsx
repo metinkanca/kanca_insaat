@@ -1,6 +1,6 @@
 
 
-export default function DetailsShowcase(props){
+export default function DetailsShowcase(props :any){
     return(
         <div key={props.id}>
             <div className="details-page" key={props.id}>
@@ -24,7 +24,7 @@ export default function DetailsShowcase(props){
                 )}
         
                 <div className="list-wrapper" key={props.id}>
-                        {props.listTitle.map((title, index) => (
+                        {props.listTitle.map((title :string, index: number) => (
                             <div className="list-pair">
                                 <ul className="listTitle">
                                     <li>{title}</li>

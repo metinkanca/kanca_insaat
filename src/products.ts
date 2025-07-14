@@ -1,5 +1,14 @@
 
-const products = [
+const products:{
+    id: number;
+    title: String;
+    link: string[];
+    brand: string[];
+    productType: String;
+    img: string[];
+    brandImg: string[];
+}[] 
+= [
     {
         id: 0,
         title: 'Isı Pompaları',

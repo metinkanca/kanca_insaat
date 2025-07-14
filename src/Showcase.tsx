@@ -1,7 +1,6 @@
-import { useState } from 'react';
+
 import { Link } from 'react-router-dom'
-export default function Showcase(props) {
-    const [showElements,setShowElements] = useState(false);
+export default function Showcase(props :any) {
     return (
         <div className="product-tab">
             <div className='full-container'>
@@ -16,7 +15,7 @@ export default function Showcase(props) {
                 </div>
 
                 <div className="brand-container">
-                    {props.link.map((link, index) => (
+                    {props.link.map((link :any, index :number) => (
                     <div key={props.id} className="brand-wrapper">
                         <Link to ={`/brandpage/${props.productType}/${props.brand[index]}`}>
                             <img className="brand-name" src={props.brandImg[index]}></img>
