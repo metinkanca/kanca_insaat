@@ -3,8 +3,12 @@ import brands from "./brands.ts"
 import { useParams } from "react-router-dom";
 
 export default function BrandPage(){
-    const {productType,brand} = useParams();
+    const {productType, brand} = useParams();
     console.log("Params:", productType, brand);
+    
+    if (!productType || !brand) {
+        return <h1>Invalid parameters</h1>;
+    }
     
     const brPage = brands.find(item => item.productType === productType && item.brand.includes(brand));
     if (!brPage) {

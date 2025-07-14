@@ -9,5 +9,7 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "strict": false
-  }
+  },
+  "noEmit": false,
+  "noEmitOnError": false,
 }
