@@ -4,7 +4,7 @@ export default function Header(){
         <header>
             <div className='header_kanca'>
             <Link to = "/">
-            <img className="header_logo"  src="/images/kanca-1.png"></img>
+            <img className="header_logo"  src="../images/kanca-1.png"></img>
             </Link>
             <h1 className='header_company'>KANCA</h1>
             </div>

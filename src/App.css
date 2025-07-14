@@ -386,9 +386,7 @@ footer > p{
   font-size: 20px;
 }
 
-.main_page_products{
-  
-}
+
 .main_page_wrapper{
   box-sizing: border-box;
 }
@@ -677,9 +675,7 @@ footer > p{
   font-weight: bold;
   max-width: 90vw;
 }
-.details-page > h1{
-  
-}
+
 .details-product-name{
   display: flex;
   justify-content: center;
@@ -720,9 +716,7 @@ footer > p{
   width: 480px;
   justify-content: space-around;
 }
-.list-wrapper{
 
-}
 .listTitle, .listValue{
   margin: 10px 0px;
   padding: 0;
@@ -855,8 +849,7 @@ footer > p{
     transform: translateY(-5px);
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
 }
-.brand-page-center{
-}
+
 .brand-product-img{
   width: 100%;
   height: 100%;
