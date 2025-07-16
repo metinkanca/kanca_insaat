@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function BrandShowcase(props: any){
     return(
         <>
-            <div className="page-title">
+            <div className="brand-page-title">
                 <p className="products-page-title">{props.brand} {props.productName}</p>
             </div>
             <div className="brand-margin">
