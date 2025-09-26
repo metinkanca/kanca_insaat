@@ -9,7 +9,7 @@ export default function BrandDetailsPage(props: any){
         <>
             {props.link.map((_: any, index: number) => (
                 <div key={`${props.id}-${index}`} className="product-tab">
-                    <Link to={`/products/${props.productType}/${props.brand[index]}`}>
+                    <Link to={`/products/${props.productType}/${props.brand[index]}`} style={{ textDecoration: 'none' }}>
                         <div className='full-container'>
                             <div className="product-container"
                                 style={{
