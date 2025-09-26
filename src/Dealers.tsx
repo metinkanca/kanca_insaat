@@ -7,9 +7,12 @@ import kas from "/images/kas_logo.png"
 import norm from "/images/norm_logo.png"
 import tema from "/images/tema_logo.png"
 import trakya from "/images/trakya_logo.png"
+import rush from "/images/rush_logo.png"
+import kentas from "/images/kentas_logo.png"
+import adey from "/images/adey_logo.webp"
 import DealerSlider from "./DealerSlider"
 
-const logos = [baymak, daiwa, eca, firat, hursan, kas, norm, tema, trakya]
+const logos = [baymak, daiwa, eca, firat, hursan, kas, norm, tema, trakya, rush, kentas, adey]
 
 export default function Dealers() {
     return (

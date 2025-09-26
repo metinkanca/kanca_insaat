@@ -1,3 +1,4 @@
+import Breadcrumbs from "./Breadcrumbs.tsx";
 import Showcase from "./Showcase.tsx";
 import products from "./products.ts"
 
@@ -21,7 +22,7 @@ export default function Products(){
   return (
     <>
     <div className="page-title"><p className="products-page-title">ÜRÜNLER</p></div>
-    
+    <Breadcrumbs />
     <div className="showcase-container">
       {elements}
     </div>

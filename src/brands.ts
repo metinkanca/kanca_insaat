@@ -134,6 +134,30 @@ const brands :{
         ]
     },
 
+    {
+   
+        brand: ['Rush'],
+        productName: "Boylerleri",
+        productType: 'boyler',
+        productCode: ['RSS100','RSS160','RSS200','RSS300','RSS500','RSD200','RSD300','RSD500','RSD800','RSE100','RSE160','RSE200','RSE300','RSE500'],
+        img: ['/images/brands_page_images/boylerler/RSS.jpg',
+            '/images/brands_page_images/boylerler/RSS.jpg',
+            '/images/brands_page_images/boylerler/RSS.jpg',
+            '/images/brands_page_images/boylerler/RSS.jpg',
+            '/images/brands_page_images/boylerler/RSS.jpg',
+            '/images/brands_page_images/boylerler/RSD.jpg',
+            '/images/brands_page_images/boylerler/RSD.jpg',
+            '/images/brands_page_images/boylerler/RSD.jpg',
+            '/images/brands_page_images/boylerler/RSD.jpg',
+            '/images/brands_page_images/boylerler/RSE.jpg',
+            '/images/brands_page_images/boylerler/RSE.jpg',
+            '/images/brands_page_images/boylerler/RSE.jpg',
+            '/images/brands_page_images/boylerler/RSE.jpg',
+            '/images/brands_page_images/boylerler/RSE.jpg',
+           
+        ]
+    },
+
     //////////////////// TERMOBOYLERLER ////////////////////
     {
 
@@ -156,7 +180,19 @@ const brands :{
         productCode: ['AQUA'],
         img: ['/images/brands_page_images/buffer_tanklari/AQUA.jpg']
     },
+     {
 
+        brand: ['Rush'],
+        productName: "Buffer Tankları",
+        productType: 'buffer_tanki',
+        productCode: ['RSB100','RSB160','RSB200','RSB300','RSB500'],
+        img: ['/images/brands_page_images/buffer_tanklari/RSB.jpg',
+            '/images/brands_page_images/buffer_tanklari/RSB.jpg',
+            '/images/brands_page_images/buffer_tanklari/RSB.jpg',
+            '/images/brands_page_images/buffer_tanklari/RSB.jpg',
+            '/images/brands_page_images/buffer_tanklari/RSB.jpg',
+        ]
+    },
     //////////////////// ELEKTRİKLİ TERMOSİFONLAR ////////////////////
     {
 
@@ -218,11 +254,13 @@ const brands :{
         brand: ['Termoteknik'],
         productName: "Kombileri",
         productType: 'kombi',
-        productCode: ['LOTUS-20','LOTUS-26','LOTUS-36','LOTUS-42'],
+        productCode: ['LOTUS-20','LOTUS-26','LOTUS-36','LOTUS-42','LOGIC2-26',"LOGIC2-31"],
         img: ['/images/brands_page_images/kombiler/lotus.jpg',
             '/images/brands_page_images/kombiler/lotus.jpg',
             '/images/brands_page_images/kombiler/lotus.jpg',
             '/images/brands_page_images/kombiler/lotus.jpg',
+            '/images/brands_page_images/kombiler/logic2.jpg',
+            '/images/brands_page_images/kombiler/logic2.jpg',
         ]
     },
 
@@ -238,6 +276,27 @@ const brands :{
         ]
     },
 
+    //////////////////// HİDROFORLAR ////////////////////
+    {
+        brand: ['Kentaş'],
+        productName: "Hidroforlar",
+        productType: 'hidrofor',
+        productCode: ['1WZB370','1WZB750'],
+        img: ['/images/brands_page_images/hidroforlar/1WZB370-750.png',
+            '/images/brands_page_images/hidroforlar/1WZB370-750.png'
+        ]
+    },
+    //////////////////// KORUYUCU MALZEMELER ///////////////
+    {
+        brand: ['Adey'],
+        productName: "Koruyucu Malzemeler",
+        productType: 'koruyucu_malzeme',
+        productCode: ['MCZERO','MCZEROPLUS','PROFESSIONAL2XP'],
+        img: ['/images/brands_page_images/koruyucu_malzemeler/mczero.jpg',
+            '/images/brands_page_images/koruyucu_malzemeler/mczeroplus.jpg',
+            '/images/brands_page_images/koruyucu_malzemeler/professional2xp.jpg'
+        ]
+    },
 ];
 
 export default brands;

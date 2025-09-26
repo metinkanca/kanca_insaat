@@ -942,7 +942,232 @@ const detailsList:{
         brand: ['Baymak'],
         img: ["/images/brands_page_images/boylerler/T80-1000L.jpg"]
     },
+    ////////////////// Rush ////////////////////
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSS100"],
+        productName : ["RSS100 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["100 lt", "380 mm", "480 mm", "1026 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 1/2 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSS.jpg"]
+    },
+    
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSS160"],
+        productName : ["RSS160 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["160 lt", "480 mm", "580 mm", "1126 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 1/2 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSS.jpg"]
+    },
+    
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSS200"],
+        productName : ["RSS200 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["200 lt", "480 mm", "580 mm", "1276 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 1/2 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSS.jpg"]
+    },
+    
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSS300"],
+        productName : ["RSS300 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["300 lt", "480 mm", "580 mm", "1826 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 1/2 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSS.jpg"]
+    },
+    
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSS500"],
+        productName : ["RSS500 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["500 lt", "640 mm", "740 mm", "1896 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 3/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSS.jpg"]
+    },
+    
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSD200"],
+        productName : ["RSD200 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["200 lt", "480 mm", "580 mm", "1276 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 1/2 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSD.jpg"]
+    },
 
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSD300"],
+        productName : ["RSD300 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["300 lt", "480 mm", "580 mm", "1826 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 1/2 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSD.jpg"]
+    },
+
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSD500"],
+        productName : ["RSD500 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["500 lt", "640 mm", "740 mm", "1896 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1 ½ inç","1 inç"," 3/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSD.jpg"]
+    },
+
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSD800"],
+        productName : ["RSD800 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["800 lt", "850 mm", "1010 mm", "1756 mm", "1 ¼ inç"," 1 ¼ inç", "1 ¼ inç"," 2 inç","1 ¼ inç"," 3/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSD.jpg"]
+    },
+
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSE100"],
+        productName : ["RSE100 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["100 lt", "380 mm", "480 mm", "1026 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1½ inç (STD x2 - OP x4)","1 inç"," 1/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSE.jpg"]
+    },
+
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSE160"],
+        productName : ["RSE160 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["160 lt", "480 mm", "580 mm", "1116 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1½ inç (STD x2 - OP x4)","1 inç"," 1/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSE.jpg"]
+    },
+
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSE200"],
+        productName : ["RSE200 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["200 lt", "480 mm", "580 mm", "1276 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1½ inç (STD x2 - OP x4)","1 inç"," 1/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSE.jpg"]
+    },
+
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSE300"],
+        productName : ["RSE300 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["300 lt", "480 mm", "580 mm", "1826 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1½ inç (STD x2 - OP x4)","1 inç"," 1/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSE.jpg"]
+    },
+
+    {
+        id : 7,
+        productType: 'boyler',
+        productCode : ["RSE500"],
+        productName : ["RSS500 Boyler"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Anot", "Soğuk Su Girişi", "Drenaj", "Elektrik Rezistans Bağlantısı", "Sıcak Su Çıkışı", "Sirkülasyon Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["500 lt", "640 mm", "740 mm", "1896 mm", "1 ¼ inç"," 1 inç", "1 ¼ inç"," 1½ inç (STD x2 - OP x4)","1 inç"," 3/4 inç"," 1/2 inç"," STD/Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/boylerler/RSE.jpg"]
+    },
+
+    
     //////////////////// TERMOBOYLERLER ////////////////////
         ///////////////////// Baymak ///////////////////// 
     {
@@ -1011,7 +1236,86 @@ const detailsList:{
         brand: ['Baymak'],
         img: ["/images/brands_page_images/buffer_tanklari/AQUA.jpg"]
     },
+        ///////////////////// Rush ///////////////////// 
+    {
+        id : 9,
+        productType: 'buffer_tanki',
+        productCode : ["RSB100"],
+        productName : ["RSB100 Buffer Tankı"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Hava Tahliye", "Soğuk Su Giriş - Çıkış Bağlantısı", "Drenaj", "Sıcak Su Giriş - Çıkış Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["100 lt", "380 mm", "480 mm", "1026 mm", "1/2 inç"," 1 inç", "1 ¼ inç","1 inç","1/2 inç","OP / Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/buffer_tanklari/RSB.jpg"]
+    },
 
+    {
+        id : 9,
+        productType: 'buffer_tanki',
+        productCode : ["RSB160"],
+        productName : ["RSB160 Buffer Tankı"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Hava Tahliye", "Soğuk Su Giriş - Çıkış Bağlantısı", "Drenaj", "Sıcak Su Giriş - Çıkış Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["160 lt", "480 mm", "580 mm", "1116 mm", "1/2 inç"," 1 inç", "1 ¼ inç","1 inç","1/2 inç","OP / Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/buffer_tanklari/RSB.jpg"]
+    },
+
+    {
+        id : 9,
+        productType: 'buffer_tanki',
+        productCode : ["RSB200"],
+        productName : ["RSB200 Buffer Tankı"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Hava Tahliye", "Soğuk Su Giriş - Çıkış Bağlantısı", "Drenaj", "Sıcak Su Giriş - Çıkış Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["200 lt", "480 mm", "580 mm", "1276 mm", "1/2 inç"," 1 inç", "1 ¼ inç","1 inç","1/2 inç","OP / Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/buffer_tanklari/RSB.jpg"]
+    },
+
+    {
+        id : 9,
+        productType: 'buffer_tanki',
+        productCode : ["RSB300"],
+        productName : ["RSB300 Buffer Tankı"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Hava Tahliye", "Soğuk Su Giriş - Çıkış Bağlantısı", "Drenaj", "Sıcak Su Giriş - Çıkış Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["300 lt", "480 mm", "580 mm", "1826 mm", "1/2 inç"," 1 inç", "1 ¼ inç","1 inç","1/2 inç","OP / Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/buffer_tanklari/RSB.jpg"]
+    },
+
+    {
+        id : 9,
+        productType: 'buffer_tanki',
+        productCode : ["RSB500"],
+        productName : ["RSB500 Buffer Tankı"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Hacim", "İç Çap", "Dış Çap", "Yükseklik (± 30mm)", "Hava Tahliye", "Soğuk Su Giriş - Çıkış Bağlantısı", "Drenaj", "Sıcak Su Giriş - Çıkış Bağlantısı",
+             "Termo. ve Sensör Bağlantısı", "Termometre (0 - 120 °C)"
+        ],
+        listValue: ["500 lt", "640 mm", "740 mm", "1896 mm", "1/2 inç"," 1 inç", "1 ¼ inç","1 inç","1/2 inç","OP / Ø63 mm"],
+        brand: ['Rush'],
+        img: ["/images/brands_page_images/buffer_tanklari/RSB.jpg"]
+    },
     //////////////////// ELEKTRİKLİ TERMOSİFONLAR ////////////////////
         ///////////////////// Baymak ///////////////////// 
     {
@@ -1421,7 +1725,39 @@ const detailsList:{
         listValue: ["41,1 kW", "43,6 kW", "8,5 kW", "A/A", "30-80 °C","52 dB"],
         brand: ['Termoteknik'],
         img: ["/images/brands_page_images/kombiler/lotus.jpg"]
+    },
+    
+    {
+        id : 12,
+        productType: 'kombi',
+        productCode : ["LOGIC2-26"],
+        productName : ["Logic2 c26/35 Kombi"],
+        depth: "278",
+        width: "395",
+        height: "700",
+        listTitle: ["Isıtma İçin Kapasite (80/60)", "Isıtma İçin Kapasite (50/30)", "Sıcak Su İçin Kapasite", "Isıtma Min. Gaz Tüketimi", "Isıtma Max. Gaz Tüketimi",
+            "Mevsimsel Alan Isıtma Verimliliği Sınıfı", "Kalorifer Suyu Sıcaklığı Min. / Max.", "Kullanım Suyu Sıcaklığı Min. / Max."
+        ],
+        listValue: ["24,2 kW", "25,6 kW", "35,3 kW", "0,7 m³/h", "2,5 m³/h", "A", "30/80 °C", "40/65 °C" ],
+        brand: ['Termoteknik'],
+        img: ["/images/brands_page_images/kombiler/logic2.jpg"]
     },   
+    
+    {
+        id : 12,
+        productType: 'kombi',
+        productCode : ["LOGIC2-31"],
+        productName : ["Logic2 c31/35 Kombi"],
+        depth: "278",
+        width: "395",
+        height: "700",
+        listTitle: ["Isıtma İçin Kapasite (80/60)", "Isıtma İçin Kapasite (50/30)", "Sıcak Su İçin Kapasite", "Isıtma Min. Gaz Tüketimi", "Isıtma Max. Gaz Tüketimi",
+            "Mevsimsel Alan Isıtma Verimliliği Sınıfı", "Kalorifer Suyu Sıcaklığı Min. / Max.", "Kullanım Suyu Sıcaklığı Min. / Max."
+        ],
+        listValue: ["30,3 kW", "31 kW", "35,3 kW", "0,7 m³/h", "3,1 m³/h", "A", "30/80 °C", "40/65 °C" ],
+        brand: ['Termoteknik'],
+        img: ["/images/brands_page_images/kombiler/logic2.jpg"]
+    }, 
         ///////////////////// Demirdöküm ///////////////////// 
     {
         id : 12,
@@ -1487,6 +1823,82 @@ const detailsList:{
         img: ["/images/brands_page_images/kombiler/vintomix.jpg"]
     },   
 
+    //////////////////// HİDROFORLAR ////////////////////
+
+    {
+        id : 13,
+        productType: 'hidrofor',
+        productCode : ["1WZB370"],
+        productName : ["1WZB370 Hidrofor"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["P2","HP","Emiş (MT)","Giriş - Çıkış","M3/H","Delivery n 2850 1/min","0.00","0.50",
+            "1.00","1.54","2.00","3.00"
+        ],
+        listValue: ["","0.5","8","1\" - 1\"","H/m","","36","26","18","10","2",""],
+        brand: ['Kentaş'],
+        img: ["/images/products_page_images/kentas_hidrofor.png"]
+    },
     
+    {
+        id : 13,
+        productType: 'hidrofor',
+        productCode : ["1WZB750"],
+        productName : ["1WZB750 Hidrofor"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["P2","HP","Emiş (MT)","Giriş - Çıkış","M3/H","Delivery n 2850 1/min","0.00","0.50",
+            "1.00","1.54","2.00","3.00"
+        ],
+        listValue: ["","0.5","8","1\" - 1\"","H/m","","50","38","31.2","23","16","3.4"],
+        brand: ['Kentaş'],
+        img: ["/images/products_page_images/kentas_hidrofor.png"]
+    },   
+    //////////////// KORUYUCU MALZEMELER ////////////////
+    {
+        id : 14,
+        productType: 'koruyucu_malzeme',
+        productCode : ["MCZERO"],
+        productName : ["MCZero Anti-Freeze"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Konsantrasyon","%25", "%30", "%35", "%40"
+        ],
+        listValue: ["Koruma","-11°C","-15°C","-18°C","-22°C"],
+        brand: ['Adey'],
+        img: ["/images/brands_page_images/koruyucu_malzemeler/mczero.jpg"]
+    },
+    {
+        id : 14,
+        productType: 'koruyucu_malzeme',
+        productCode : ["MCZEROPLUS"],
+        productName : ["MCZero+ Anti-Freeze"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Konsantrasyon","%10", "%15", "%20", "%25", "%30", "%35", "%40"
+        ],
+        listValue: ["Koruma","-3°C","-5°C","-6°C","-9°C","-12°C","-15°C","-18°C"],
+        brand: ['Adey'],
+        img: ["/images/brands_page_images/koruyucu_malzemeler/mczeroplus.jpg"]
+    },
+
+    {
+        id : 14,
+        productType: 'koruyucu_malzeme',
+        productCode : ["PROFESSIONAL2XP"],
+        productName : ["MagnaClean Professional2XP"],
+        depth: "",
+        width: "",
+        height: "",
+        listTitle: ["Maksimum Çalışma Sıcaklığı", "Minimum Montaj Yüksekliği", "Maksimum Çalışma Basıncı", "Maksimum Akış Hızı"
+        ],
+        listValue: ["95°C", "310 mm", "6 bar", "80 l/dk"],
+        brand: ['Adey'],
+        img: ["/images/brands_page_images/koruyucu_malzemeler/professional2xp.jpg"]
+    },   
 ];
 export default detailsList;
