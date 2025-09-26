@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import React, {useLayoutEffect} from 'react';
+import {useLayoutEffect} from 'react';
 import Header from './Header.tsx';
 import Home from './Home.tsx';
 import './App.css';
@@ -10,7 +10,7 @@ import Dealers from './Dealers.tsx';
 import DetailsPage from './DetailsPage.tsx';
 import BrandPage from './BrandPage.tsx';
 import BrandDetails from './BrandDetails.tsx';
-import Breadcrumbs from './Breadcrumbs.tsx'; // Add this import
+
 const Wrapper = ({ children }: any) => {
   const location = useLocation();
   useLayoutEffect(() => {

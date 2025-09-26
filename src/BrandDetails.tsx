@@ -6,7 +6,6 @@ export default function BrandDetails(){
   const { productType } = useParams();
   const filteredProducts = products.filter(prod => prod.productType === productType);
   
-  // Get the title from the first product (assuming all filtered products have the same title)
   const pageTitle = filteredProducts[0].title;
   
   const brands = filteredProducts.map((prod: any) => {
