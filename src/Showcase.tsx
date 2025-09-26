@@ -16,16 +16,6 @@ export default function Showcase(props: any) {
                     }}>
                         <h1 className="product-name">{props.title}</h1>
                     </div>
-                
-                {/*<div className="brand-container">
-                    {props.link.map((_: any, index: number) => (
-                    <div key={props.id} className="brand-wrapper">
-                        <Link to ={`/brandpage/${props.productType}/${props.brand[index]}`}>
-                            <img className="brand-name" src={props.brandImg[index]}></img>
-                        </Link>
-                    </div>
-                    ))}
-                </div>*/}
             </div>
             </Link>
         </div>
