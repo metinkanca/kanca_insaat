@@ -18,22 +18,7 @@ const brands :{
               '/images/brands_page_images/isi_pompalari/DW-18-24.jpg'
         ]
     },
-    {
-        brand: ['Baymak'],
-        productName: "Isı Pompaları",
-        productType: 'isi_pompasi',
-        productCode: ['IO-MM80P', 'IO-MM100P', 'IO-MM120P', 'IO-MM140P', 'IO-MM160P', 'IO-MT160P','IO-MT220P','IO-MT260P','IO-MT300P'],
-        img: ['/images/brands_page_images/isi_pompalari/IO-MM.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MM.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MM.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MM.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MM.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MM.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MT.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MT.jpg',
-            '/images/brands_page_images/isi_pompalari/IO-MT.jpg',
-             ]
-    },
+    
 
     //////////////////// PELET KAZANLARI ////////////////////
     {
@@ -115,24 +100,7 @@ const brands :{
     },
 
     //////////////////// BOYLERLER ////////////////////
-    {
-   
-        brand: ['Baymak'],
-        productName: "Boylerleri",
-        productType: 'boyler',
-        productCode: ['T80L','T100L','T120L','T160L','T200L','T300L','T400L','T500L','T800L','T100L'],
-        img: ['/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg',
-            '/images/brands_page_images/boylerler/T80-1000L.jpg'
-        ]
-    },
+    
 
     {
    
@@ -172,14 +140,7 @@ const brands :{
     },
 
     //////////////////// BUFFER TANKLARI ////////////////////
-    {
 
-        brand: ['Baymak'],
-        productName: "Buffer Tankları",
-        productType: 'buffer_tanki',
-        productCode: ['AQUA'],
-        img: ['/images/brands_page_images/buffer_tanklari/AQUA.jpg']
-    },
      {
 
         brand: ['Rush'],
@@ -194,35 +155,10 @@ const brands :{
         ]
     },
     //////////////////// ELEKTRİKLİ TERMOSİFONLAR ////////////////////
-    {
-
-        brand: ['Baymak'],
-        productName: "Elektrikli Termosifonları",
-        productType: 'elektrikli_termosifon',
-        productCode: ['MTK-50','MTK-65','MTK-80','MTK-100'],
-        img: ['/images/brands_page_images/elektrikli_termosifonlari/MTK50-100.jpg',
-            '/images/brands_page_images/elektrikli_termosifonlari/MTK50-100.jpg',
-            '/images/brands_page_images/elektrikli_termosifonlari/MTK50-100.jpg',
-            '/images/brands_page_images/elektrikli_termosifonlari/MTK50-100.jpg'
-        ]
-    },
+    
     
     //////////////////// SİRKÜLASYON POMPALARI ////////////////////
-    {
-     
-        brand: ['Baymak'],
-        productName: "Sirkülasyon Pompaları",
-        productType: 'sirkulasyon_pompasi',
-        productCode: ['EVOSTA2-40-70-130','EVOSTA2-40-70-180','EVOSTA3-60-180','EVOSTA3-60-180X','EVOSTA3-80-130','EVOSTA3-80-130X','EVOSTA3-80-180X'],
-        img: ['/images/brands_page_images/sirkulasyon_pompalari/EVOSTA2.jpg',
-            '/images/brands_page_images/sirkulasyon_pompalari/EVOSTA2.jpg',
-            '/images/brands_page_images/sirkulasyon_pompalari/EVOSTA3.jpg',
-            '/images/brands_page_images/sirkulasyon_pompalari/EVOSTA3.jpg',
-            '/images/brands_page_images/sirkulasyon_pompalari/EVOSTA3.jpg',
-            '/images/brands_page_images/sirkulasyon_pompalari/EVOSTA3.jpg',
-            '/images/brands_page_images/sirkulasyon_pompalari/EVOSTA3.jpg',
-        ]
-    },
+   
 
     //////////////////// KOMBİLER ////////////////////
     {
@@ -236,19 +172,7 @@ const brands :{
         ]
     },
 
-    {
-        brand: ['Baymak'],
-        productName: "Kombileri",
-        productType: 'kombi',
-        productCode: ['LUNATEC-20','LUNATEC-20','LUNATEC-30','LUNATEC-35','DUOTEC-COMPACT-24','DUOTEC-COMPACT-30'],
-        img: ['/images/brands_page_images/kombiler/lunatec.jpg',
-            '/images/brands_page_images/kombiler/lunatec.jpg',
-            '/images/brands_page_images/kombiler/lunatec.jpg',
-            '/images/brands_page_images/kombiler/lunatec.jpg',
-            '/images/brands_page_images/kombiler/duotec.jpg',
-            '/images/brands_page_images/kombiler/duotec.jpg',
-        ]
-    },
+   
 
     {
         brand: ['Termoteknik'],
