@@ -1,0 +1,4 @@
+{
+  "_comment": "Copy to admin-target.json and set the URL of the deployed admin panel (npm run deploy-admin). If admin-target.json is missing, the desktop app skips the remote panel and serves the copy bundled at build time.",
+  "remoteUrl": "https://your-admin-panel-hosting-site.web.app/admin"
+}

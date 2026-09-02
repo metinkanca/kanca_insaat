@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Admin = user whose ID token carries the `admin: true` custom claim.
+    // The claim can only be granted with the Firebase Admin SDK (service
+    // account) via scripts/set-admin-claim.cjs — never from client code.
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    function isSelf(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // ---- Catalog: public read, admin-only write ----
+    match /products/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /categories/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Selling units ("birim") admins add from the Birim Ayarla page. Read is
+    // public so the catalog can label prices without an extra auth hop.
+    match /units/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /brandGroups/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /homeConfig/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---- Orders ----
+    // Guests and dealers create orders at checkout. A dealerId, when present,
+    // must belong to the signed-in user. Only admin reads/manages all orders;
+    // dealers can read their own (queries must filter on dealerId).
+    match /orders/{doc} {
+      allow create: if request.resource.data.status == 'pending'
+        && request.resource.data.keys().hasAll(['customerName', 'email', 'phone', 'total', 'currency', 'items', 'createdAt'])
+        && (!('dealerId' in request.resource.data)
+            || isSelf(request.resource.data.dealerId));
+      allow read: if isAdmin()
+        || (request.auth != null && resource.data.dealerId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---- Dealers ----
+    // Registration creates the caller's own doc with status 'pending'.
+    // Dealers read only their own doc; approval/edits are admin-only.
+    match /dealers/{uid} {
+      // Admins create accounts manually; self-registration creates own doc.
+      allow create: if isAdmin()
+        || (isSelf(uid) && request.resource.data.status == 'pending');
+      allow read: if isAdmin() || isSelf(uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---- Quote requests ----
+    // Dealers create quotes for themselves and read their own; admin manages.
+    match /quoteRequests/{doc} {
+      allow create: if isSelf(request.resource.data.dealerId)
+        && request.resource.data.status == 'pending';
+      allow read: if isAdmin()
+        || (request.auth != null && resource.data.dealerId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---- Dealer ledger (cari hesap) ----
+    // Dealers read their own entries; only admin writes.
+    match /dealerPayments/{doc} {
+      allow read: if isAdmin()
+        || (request.auth != null && resource.data.dealerId == request.auth.uid);
+      allow write: if isAdmin();
+    }
+
+    // Everything not matched above is denied by default.
+  }
+}

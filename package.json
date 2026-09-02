@@ -1,0 +1,71 @@
+{
+  "name": "kanca_insaat",
+  "private": true,
+  "version": "1.0.1",
+  "description": "Kanca İnşaat yönetim paneli",
+  "author": "Kanca İnşaat",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "admin": "vite --mode admin --port 5199 --strictPort",
+    "admin:build": "vite build --mode admin --outDir dist-admin",
+    "exe": "npm run admin:build && electron-builder --win",
+    "deploy-admin": "npm run admin:build && firebase deploy --only hosting:updates",
+    "deploy-dealer": "npm run build && firebase deploy --only hosting:kancainsaat-343da",
+    "set-admin": "node scripts/set-admin-claim.cjs",
+    "deploy-rules": "firebase deploy --only firestore:rules",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.kancainsaat.admin",
+    "productName": "Kanca Admin",
+    "electronDist": "node_modules/electron/dist",
+    "files": [
+      "electron/**/*",
+      "dist-admin/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "createDesktopShortcut": "always",
+      "runAfterFinish": true,
+      "artifactName": "Kanca-Admin-Kurulum-${version}.${ext}"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "firebase": "^12.14.0",
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.4.0",
+    "react-router-dom": "^7.1.1",
+    "xlsx": "^0.18.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^43.1.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "firebase-admin": "^13.0.0",
+    "firebase-tools": "^15.23.0",
+    "globals": "^15.13.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.1",
+    "vite": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}
