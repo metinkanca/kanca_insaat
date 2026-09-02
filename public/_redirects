@@ -1,3 +1,0 @@
-# Cloudflare Pages SPA routing: every path serves index.html so BrowserRouter
-# can handle /products/*, /bayi/*, /admin/* on a hard refresh or direct link.
-/*    /index.html   200

@@ -1,0 +1,16 @@
+{
+  // Tells Workers Builds what to upload. Without this file the deploy step
+  // fails with "Missing entry-point to Worker script or to assets directory".
+  //
+  // This is a static-asset Worker: there is no server script, just the Vite
+  // build output. `npm run build` writes dist/, and this uploads it.
+  "name": "kanca-insaat",
+  "compatibility_date": "2026-08-31",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for unknown paths so BrowserRouter can handle
+    // /products/*, /bayi/* and /admin/* on refresh or a direct link.
+    // This is the Workers equivalent of Pages' _redirects file.
+    "not_found_handling": "single-page-application"
+  }
+}
