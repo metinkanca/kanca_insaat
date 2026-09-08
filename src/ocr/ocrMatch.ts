@@ -252,15 +252,78 @@ const PARENTHESIZED_QUALIFIER = /\([^()]+\)\s*$/;
 const BARE_QUALIFIER = new RegExp(
   `\\S\\s+\\d+\\s*(?:${QTY_UNIT})\\b[.,]?\\s+([a-zçğıöşü]{4,}(?:\\s+[a-zçğıöşü]{2,})*)\\s*$`, 'i');
 
+// The same mark standing where the description belongs rather than at the
+// end of the line: "100x 2000 (") 15" is a row whose middle column says
+// "boru again", with its count after it. This is the geometry-free half of
+// the columnar repair in `resolveDittoColumns` — the column is gone, but
+// the line above still has the words the mark stands for.
+const STANDALONE_DITTO = /^["'‘’“”′″]{1,3}$/;
+const WORD_TOKEN = /^[a-zçğıöşü]{2,}$/i;
+
+// Runs of plain words in a line, with where each starts. "100x 3000 BORU"
+// has one ("BORU"); the sizes around it are not words and cannot be what a
+// ditto repeats.
+function wordRuns(tokens: string[]): { index: number; text: string }[] {
+  const runs: { index: number; text: string }[] = [];
+  tokens.forEach((t, i) => {
+    if (!WORD_TOKEN.test(t)) return;
+    const last = runs[runs.length - 1];
+    if (last && last.index + last.text.split(' ').length === i) last.text += ` ${t}`;
+    else runs.push({ index: i, text: t });
+  });
+  return runs;
+}
+
+function fillInteriorDitto(line: string, previous: string | null): string {
+  if (!previous) return line;
+  const tokens = line.split(/\s+/).filter(Boolean);
+  // Only a row that has no description of its own is missing one. Where the
+  // dealer did write words, a mark somewhere else on the line is repeating
+  // something else — the unit next to a count, most often — and copying the
+  // description of the row above into it would invent an order line.
+  if (tokens.some(t => WORD_TOKEN.test(t))) return line;
+
+  // One mark, with something after it. Two marks on a line stand in two
+  // different columns and there is no longer anything to say which word
+  // belongs to which, and a mark in final position is the trailing-qualifier
+  // case the rule below already reads correctly.
+  const at = tokens.findIndex(t => STANDALONE_DITTO.test(t));
+  if (at < 0 || at === tokens.length - 1) return line;
+  if (tokens.some((t, i) => i !== at && STANDALONE_DITTO.test(t))) return line;
+
+  // A ditto repeats the row above, and a row carries numbers. Without that
+  // the line above is a heading or a date the page was written on, and its
+  // words are nothing the dealer meant to order twice.
+  if (!/\d/.test(previous)) return line;
+
+  const runs = wordRuns(previous.split(/\s+/).filter(Boolean));
+  if (!runs.length) return line;
+
+  // Nearest by position among the row's numbers: with the columns gone,
+  // that is all that is left of which one the mark stands under.
+  const source = runs.reduce((best, r) =>
+    Math.abs(r.index - at) < Math.abs(best.index - at) ? r : best);
+  return tokens.map((t, i) => (i === at ? source.text : t)).join(' ');
+}
+
 export function applyDittoMarks(lines: string[]): string[] {
   let lastQualifier: string | null = null;
-  return lines.map(line => {
+  // The line as this pass leaves it, so a run of ditto rows chains: each one
+  // is a real description by the time the next looks back at it.
+  let previous: string | null = null;
+
+  return lines.map(raw => {
+    const line = fillInteriorDitto(raw, previous);
+    previous = line;
+
     const dittoMatch = line.match(DITTO_PATTERN);
     if (dittoMatch && dittoMatch.index != null) {
       // Drop the mark either way — as punctuation it is only noise to the
       // matcher, and keeping it can only mislead.
       const head = line.slice(0, dittoMatch.index).trimEnd();
-      return lastQualifier ? `${head} ${lastQualifier}` : head;
+      const resolved = lastQualifier ? `${head} ${lastQualifier}` : head;
+      previous = resolved;
+      return resolved;
     }
 
     const parenthesized = line.match(PARENTHESIZED_QUALIFIER);
@@ -562,6 +625,15 @@ function scoreProductAgainstLine(
     const pwDn = ocrDigitNorm(pw);
     for (let q = 0; q < ocrWds.length; q++) {
       const ow = ocrWds[q];
+      // One number is never a misreading of another. Fuzzy matching exists
+      // for handwriting OCR got *nearly* right, and every rule here is
+      // about letters — but "1000" and "2000" are one edit apart, and
+      // ocrDigitNorm brings them closer still by folding 1→l and 0→o. That
+      // handed every length of a pipe the same score as the one the dealer
+      // actually wrote, and which variant won came down to catalog order.
+      // A size is either the size asked for — the exact-word rule above
+      // credits that — or it is a different product.
+      if (!hasLetter(pw) && !hasLetter(ow)) continue;
       if (Math.abs(ow.length - pw.length) <= 3) {
         const d = editDistance(pw, ow);
         if (d < minDist) minDist = d;

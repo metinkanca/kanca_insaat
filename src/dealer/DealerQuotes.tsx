@@ -1,42 +1,17 @@
 import { Fragment, useEffect, useState } from 'react';
 import { collection, getDocs, addDoc, query, where, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
+import { notifyAdmin, noticeMoney } from '../notify';
 import { useDealer } from './DealerContext';
 import { fold } from '../searchFold.ts';
-import { callOcrSpaceLines, getOcrDiagnostics, runOcrOnPdf } from '../ocr/ocrUtils';
 import type { OcrDiagnostics } from '../ocr/ocrUtils';
-import {
-  applyDittoMarks,
-  buildVocabulary,
-  correctOcrLine,
-  matchProductsFromOcr,
-  mergeStubLines,
-} from '../ocr/ocrMatch';
+import { readQuoteRowsFromFile, rowFromProduct, stripQty } from '../ocr/quoteRows';
+import type { ProductWithId, ReviewRow } from '../ocr/quoteRows';
 import type { QuoteRequest, QuoteItem } from '../types/firestore';
-import type { Product } from '../types/firestore';
 
 type QuoteWithId = QuoteRequest & { id: string };
-type ProductWithId = Product & { id: string };
 
 const OCR_KEY = import.meta.env.VITE_OCR_SPACE_KEY as string | undefined;
-
-// One row of the OCR review table. productId === '' means the line did not
-// match a catalog product; it goes in as free text and is priced by the
-// admin at confirmation.
-type ReviewRow = {
-  key: number;
-  text: string;
-  qty: number;
-  productId: string;
-  productCode: string;
-  unitPrice?: number;
-  ocrLine: string;
-  // Near misses for a line that did not match: shown as one-click chips so
-  // the dealer fixes it without searching the whole catalog by hand.
-  suggestions?: { id: string; name: string }[];
-  _line?: number; // original OCR line order, for sorting
-};
-let rowKey = 1;
 
 const STATUS_BADGES: Record<string, { label: string; cls: string }> = {
   pending: { label: 'Bekliyor', cls: 'dealer-badge--warning' },
@@ -46,10 +21,6 @@ const STATUS_BADGES: Record<string, { label: string; cls: string }> = {
 };
 
 const money = (n: number) => `${n.toLocaleString('tr-TR')} ₺`;
-
-// Strip trailing quantity notation ("... 5 adet", "... 30 mt") from free text
-const stripQty = (s: string) =>
-  s.replace(/\s+\d+\s*(adet(?:ler)?|adeti?|ad|mt|metre)\s*$/i, '').trim();
 
 export default function DealerQuotes() {
   const { dealer } = useDealer();
@@ -101,16 +72,7 @@ export default function DealerQuotes() {
     setItems(prev => {
       const idx = prev.findIndex(i => i.productId === product.id);
       if (idx >= 0) return prev.filter(i => i.productId !== product.id);
-      const row: ReviewRow = {
-        key: rowKey++,
-        text: product.productName,
-        qty: 1,
-        productId: product.id,
-        productCode: product.productCode,
-        unitPrice: product.price > 0 ? product.price : undefined,
-        ocrLine: '',
-      };
-      return [...prev, row];
+      return [...prev, rowFromProduct(product)];
     });
   };
 
@@ -123,64 +85,11 @@ export default function DealerQuotes() {
     setOcrProgress(null);
     setListFileName(file.name);
     try {
-      let lines: string[];
-      if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name)) {
-        const text = await runOcrOnPdf(file, OCR_KEY, p => setOcrProgress(Math.round(p * 100)));
-        lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-      } else {
-        lines = await callOcrSpaceLines(file, OCR_KEY);
-      }
-      setOcrDebug(getOcrDiagnostics());
-      if (!lines.length) {
-        setError('Listede okunabilir yazı bulunamadı. Daha net bir fotoğraf deneyin.');
-        return;
-      }
-
-      const matchProducts = products.map(p => ({
-        id: p.id, productName: p.productName, productCode: p.productCode, brand: p.brand,
-      }));
-      // The catalog doubles as the spellchecker for the handwriting.
-      const vocabulary = buildVocabulary(matchProducts);
-      const corrected = applyDittoMarks(
-        mergeStubLines(lines.map(l => correctOcrLine(l, vocabulary))),
+      const { rows, diagnostics, error: ocrError } = await readQuoteRowsFromFile(
+        file, OCR_KEY, products, p => setOcrProgress(p),
       );
-      const { matched, unmatched } = matchProductsFromOcr(corrected, matchProducts);
-
-      const priceOf = (id: string) => {
-        const p = products.find(x => x.id === id);
-        return p && p.price > 0 ? p.price : undefined;
-      };
-
-      const rows: ReviewRow[] = [
-        ...matched.map(m => ({
-          key: rowKey++,
-          text: m.productName,
-          qty: m.quantity,
-          productId: m.productId,
-          productCode: products.find(p => p.id === m.productId)?.productCode || '',
-          unitPrice: priceOf(m.productId),
-          ocrLine: m.ocrLine,
-          _line: m.lineNumber,
-        })),
-        ...unmatched.map(u => ({
-          key: rowKey++,
-          text: stripQty(u.ocrLine),
-          qty: u.quantity,
-          productId: '',
-          productCode: '',
-          unitPrice: undefined,
-          ocrLine: u.ocrLine,
-          suggestions: u.candidates
-            .filter(c => c.score >= 10)
-            .map(c => ({ id: c.productId, name: c.productName })),
-          _line: u.lineNumber,
-        })),
-      ].sort((a, b) => (a._line ?? 0) - (b._line ?? 0));
-
-      if (!rows.length) {
-        setError('Listede ürün satırı bulunamadı. Daha net bir fotoğraf deneyin.');
-        return;
-      }
+      setOcrDebug(diagnostics);
+      if (ocrError) { setError(ocrError); return; }
       setItems(prev => [...prev, ...rows]);
     } catch (e: any) {
       setError(e.message || 'Liste okunamadı.');
@@ -249,6 +158,19 @@ export default function DealerQuotes() {
         createdAt: serverTimestamp(),
       };
       const ref = await addDoc(collection(db, 'quoteRequests'), data);
+      notifyAdmin({
+        type: 'quote',
+        title: `Yeni teklif talebi: ${data.dealerName || 'Bayi'} — ${noticeMoney(data.total)}`,
+        body: [
+          `Bayi: ${data.dealerName}`,
+          `Satır sayısı: ${quoteItems.length}`,
+          `Tutar: ${noticeMoney(data.total)}`,
+          data.source === 'list' ? 'Kaynak: Liste yükleyerek (OCR)' : 'Kaynak: Ürün seçerek',
+          data.notes ? `Not: ${data.notes}` : '',
+        ].filter(Boolean).join('\n'),
+        link: '/admin/quotes',
+        refId: ref.id,
+      });
       setQuotes(prev => [{ id: ref.id, ...data, createdAt: new Date() }, ...prev]);
       setItems([]);
       setListFileName('');

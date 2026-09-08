@@ -68,9 +68,12 @@ service cloud.firestore {
 
     // ---- Quote requests ----
     // Dealers create quotes for themselves and read their own; admin manages.
+    // Admins also create quotes on a dealer's behalf from the Teklif Ekle page
+    // (e.g. a list phoned/faxed in), so isAdmin() is an alternative to isSelf.
     match /quoteRequests/{doc} {
-      allow create: if isSelf(request.resource.data.dealerId)
-        && request.resource.data.status == 'pending';
+      allow create: if isAdmin()
+        || (isSelf(request.resource.data.dealerId)
+            && request.resource.data.status == 'pending');
       allow read: if isAdmin()
         || (request.auth != null && resource.data.dealerId == request.auth.uid);
       allow update, delete: if isAdmin();
@@ -82,6 +85,24 @@ service cloud.firestore {
       allow read: if isAdmin()
         || (request.auth != null && resource.data.dealerId == request.auth.uid);
       allow write: if isAdmin();
+    }
+
+    // ---- Admin bildirimleri ----
+    // Raised by the site itself when a bayi applies, an order is placed or a
+    // quote is submitted (src/notify.ts). Create is open because a guest
+    // checking out is not signed in — but only in this exact shape, capped in
+    // size, and always unread, so the collection cannot be used as free
+    // storage. Reading and clearing them is admin-only.
+    match /notifications/{doc} {
+      allow create: if request.resource.data.keys().hasOnly(['type', 'title', 'body', 'link', 'refId', 'read', 'createdAt'])
+        && request.resource.data.keys().hasAll(['type', 'title', 'body', 'read', 'createdAt'])
+        && request.resource.data.type in ['dealer', 'order', 'quote']
+        && request.resource.data.read == false
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 120
+        && request.resource.data.body is string
+        && request.resource.data.body.size() <= 2000;
+      allow read, update, delete: if isAdmin();
     }
 
     // Everything not matched above is denied by default.

@@ -85,6 +85,10 @@ export interface QuoteItem {
 }
 
 export interface QuoteRequest {
+  // Empty for a quote an admin created from Teklif Ekle without picking a
+  // dealer: it matches no cari hesap, so it is never listed on an account and
+  // cannot be invoiced. dealerName may then hold a free-text customer name
+  // (or be empty too).
   dealerId: string;
   dealerName: string;
   items: QuoteItem[];
@@ -130,4 +134,22 @@ export interface Order {
   items: OrderItem[];
   dealerId?: string;
   dealerName?: string;
+}
+
+// ---- Admin bildirimleri ----
+// Raised by the public site (bayi başvurusu / sipariş / teklif) from
+// src/notify.ts; read only by the panel. The same payload is e-mailed through
+// the Cloudflare Worker in worker/index.js.
+export type NotificationType = 'dealer' | 'order' | 'quote';
+
+export interface AdminNotification {
+  type: NotificationType;
+  title: string;
+  body: string;
+  /** Admin panel path the notice points at, e.g. '/admin/orders'. */
+  link: string;
+  /** Id of the dealer / order / quote document. */
+  refId: string;
+  read: boolean;
+  createdAt: any;
 }

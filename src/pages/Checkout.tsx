@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
+import { notifyAdmin, noticeMoney } from '../notify';
 import { useCart } from '../contexts/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDealer } from '../dealer/DealerContext';
@@ -48,6 +49,21 @@ export default function Checkout() {
         orderData.dealerName = dealer.companyName;
       }
       const orderRef = await addDoc(collection(db, 'orders'), orderData);
+      notifyAdmin({
+        type: 'order',
+        title: `Yeni sipariş: ${customer.name || 'İsimsiz müşteri'} — ${noticeMoney(total())}`,
+        body: [
+          `Müşteri: ${customer.name}`,
+          `Telefon: ${customer.phone}`,
+          dealer ? `Bayi: ${dealer.companyName}` : 'Bayi: — (misafir sipariş)',
+          `Tutar: ${noticeMoney(total())}`,
+          `Ürün sayısı: ${items.length}`,
+          '',
+          ...items.map(i => `• ${i.name} × ${i.qty}`),
+        ].join('\n'),
+        link: '/admin/orders',
+        refId: orderRef.id,
+      });
       clearCart();
       navigate('/checkout-success?orderId=' + orderRef.id);
     } catch (err) {

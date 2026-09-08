@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import AdminLogin from './AdminLogin';
 import AdminLayout from './AdminLayout';
 import AdminDashboard from './AdminDashboard';
+import AdminNotifications from './AdminNotifications';
 import AdminProducts from './AdminProducts';
 import AdminProductForm from './AdminProductForm';
 import AdminOrders from './AdminOrders';
@@ -17,6 +18,7 @@ import AdminProductUnit from './AdminProductUnit';
 import AdminHome from './AdminHome';
 import AdminDealers from './AdminDealers';
 import AdminQuotes from './AdminQuotes';
+import AdminQuoteCreate from './AdminQuoteCreate';
 import AdminLedger from './AdminLedger';
 import ProtectedRoute from './ProtectedRoute';
 import './admin.css';
@@ -30,6 +32,7 @@ export default function AdminApp() {
       <Route element={<ProtectedRoute />}>
         <Route element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
+          <Route path="notifications" element={<AdminNotifications />} />
           <Route path="products" element={<AdminProducts />} />
           <Route path="products/new" element={<AdminProductForm />} />
           <Route path="products/:productId/edit" element={<AdminProductForm />} />
@@ -46,6 +49,7 @@ export default function AdminApp() {
           <Route path="home" element={<AdminHome />} />
           <Route path="dealers" element={<AdminDealers />} />
           <Route path="quotes" element={<AdminQuotes />} />
+          <Route path="quotes/new" element={<AdminQuoteCreate />} />
           <Route path="ledger" element={<AdminLedger />} />
         </Route>
       </Route>

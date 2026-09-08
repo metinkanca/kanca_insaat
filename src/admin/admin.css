@@ -1326,3 +1326,226 @@
 @media (max-width: 640px) {
   .ledger-totals { grid-template-columns: 1fr; }
 }
+
+/* ===== Teklif Ekle (admin-side quote builder) =====
+   Mirrors the dealer portal's quote screen, restyled for the admin panel. */
+.admin-quote-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.admin-quote-filters .admin-search { margin-bottom: 0; }
+.admin-quote-select {
+  padding: 9px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  outline: none;
+  box-sizing: border-box;
+}
+.admin-quote-select:focus { border-color: rgb(255,82,82); }
+
+.admin-quote-hint {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+
+.admin-quote-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  max-height: 340px;
+  overflow-y: auto;
+  margin: 12px 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fafafa;
+}
+.admin-quote-product-item {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.admin-quote-product-item:hover { border-color: rgb(255,82,82); }
+.admin-quote-product-item.selected { border-color: rgb(255,82,82); background: #fdeeeb; }
+.admin-quote-thumb {
+  width: 100%;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #eee;
+}
+.admin-quote-product-name { font-size: 11px; color: #333; line-height: 1.3; }
+.admin-quote-product-price { font-size: 11px; color: #555; font-weight: 600; }
+.admin-quote-check { font-size: 11px; color: #15803d; font-weight: 700; }
+
+.admin-quote-row-input {
+  width: 100%;
+  min-width: 200px;
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+.admin-quote-qty-input {
+  width: 64px;
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.admin-quote-price-input {
+  width: 100px;
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.admin-quote-ocr-line { font-size: 11px; color: #999; margin-top: 3px; }
+.admin-quote-match-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+.admin-quote-suggestion {
+  font-size: 11px;
+  opacity: 0.85;
+  text-align: left;
+  white-space: normal;
+}
+.admin-quote-picker {
+  background: #fafafa;
+  padding: 12px;
+}
+.admin-quote-picker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+/* ===== Bildirimler ===== */
+/* Unread counter next to the sidebar link and on the mobile top bar. */
+.admin-nav-badge {
+  display: inline-block;
+  min-width: 18px;
+  margin-left: 8px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgb(255,82,82);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* The sidebar is behind the hamburger on mobile, so mark the button itself. */
+.admin-hamburger { position: relative; }
+.admin-hamburger-dot {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(255,82,82);
+}
+
+.admin-topbar-bell {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.admin-notice-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-left: 3px solid transparent;
+  border-radius: 8px;
+}
+
+.admin-notice--unread {
+  border-left-color: rgb(255,82,82);
+  background: #fffaf9;
+}
+
+.admin-notice-main {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.admin-notice-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-notice-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+.admin-notice--unread .admin-notice-title { color: #000; }
+
+.admin-notice-time {
+  margin-left: auto;
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+}
+
+.admin-notice-body {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.admin-notice-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .admin-notice { flex-direction: column; }
+  .admin-notice-time { margin-left: 0; }
+}

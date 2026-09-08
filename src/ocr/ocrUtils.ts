@@ -193,7 +193,60 @@ function assembleRows(frags: OverlayFragment[]): string[] {
     }
   }
 
-  return rows.map(r => r.parts.slice().sort((a, b) => a.left - b.left).map(p => p.text).join(' '));
+  // Order each row's fragments left to right once, so the ditto pass below
+  // can widen a resolved mark's column without disturbing the reading order.
+  const ordered = rows.map(r => r.parts
+    .slice()
+    .sort((a, b) => a.left - b.left)
+    .map(p => ({ text: p.text, left: p.left, right: p.right })));
+  resolveDittoColumns(ordered);
+
+  return ordered.map(r => r.map(p => p.text).join(' '));
+}
+
+// A fragment that is nothing but quote marks — what the writer meant as
+// "same again", with the parentheses OCR keeps eating made optional.
+const DITTO_FRAGMENT = /^[(\s]*["'‘’“”′″]{1,3}[)\s]*$/;
+
+const hasLetters = (text: string) => /[a-zçğıöşü]/i.test(text);
+
+// The writer's shorthand is columnar: under "BORU" they write a quote mark
+// and the row means boru too. Read as text the mark is unrecoverable — the
+// word it stands for was never written on that row — but on the page it is
+// simply the fragment directly above it in the same column, which is what
+// this pass copies down. Resolving top to bottom carries a word down a whole
+// run of ditto rows: each one is a real word by the time the next looks up.
+//
+// Only a fragment carrying LETTERS is copied. A quote mark in the count
+// column stands for the unit word above it, and where OCR read the unit but
+// dropped the counts, the nearest thing above is some other row's number —
+// inventing a quantity out of that is far worse than leaving the mark to be
+// stripped as punctuation.
+function resolveDittoColumns(rows: { text: string; left: number; right: number }[][]): void {
+  // A ditto refers to the run it directly follows, so the search stops two
+  // rows up: enough to step over a row where OCR missed that column (or a
+  // date heading printed across the page), not enough to reach the previous
+  // block on the page and copy a word the writer had already finished with.
+  const LOOKBACK = 2;
+
+  rows.forEach((row, i) => {
+    for (const part of row) {
+      if (!DITTO_FRAGMENT.test(part.text)) continue;
+      for (let j = i - 1; j >= 0 && j >= i - LOOKBACK; j--) {
+        const source = rows[j].find(q =>
+          hasLetters(q.text) && !DITTO_FRAGMENT.test(q.text) &&
+          Math.min(q.right, part.right) > Math.max(q.left, part.left));
+        if (!source) continue;
+        part.text = source.text;
+        // Take the source's column with the word: a column of ditto marks
+        // wanders left and right by a few pixels, and the narrow mark alone
+        // stops overlapping the one below it after a row or two.
+        part.left = Math.min(part.left, source.left);
+        part.right = Math.max(part.right, source.right);
+        break;
+      }
+    }
+  });
 }
 
 // What OCR handed back before any row assembly, kept so a bad read can be

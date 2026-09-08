@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { collection, getDocs, doc, updateDoc, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { quoteNo, totalOf, invoiceQuote } from './quoteLedger';
@@ -134,6 +135,7 @@ export default function AdminQuotes() {
     <div className="admin-page">
       <div className="admin-page-header">
         <h2 className="admin-page-title">Teklifler</h2>
+        <Link className="admin-btn admin-btn-primary" to="/admin/quotes/new">+ Teklif Ekle</Link>
       </div>
 
       <div className="admin-tabs">
@@ -162,7 +164,10 @@ export default function AdminQuotes() {
                 >
                   <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
                     <span style={{ fontWeight: 600, fontFamily: 'monospace', color: '#ddd' }}>{quoteNo(q.id)}</span>
-                    <span style={{ fontWeight: 600, color: '#fff' }}>{q.dealerName}</span>
+                    <span style={{ fontWeight: 600, color: q.dealerName ? '#fff' : '#888' }}>
+                      {q.dealerName || 'Bayisiz teklif'}
+                    </span>
+                    {!q.dealerId && <span className="admin-badge">Cari hesaba bağlı değil</span>}
                     {q.source === 'list' && <span className="admin-badge">📷 Liste</span>}
                     <span style={{ color: '#888', fontSize: 13 }}>{q.items.length} kalem</span>
                     {total > 0 && <span style={{ color: '#ccc', fontSize: 13, fontWeight: 700 }}>{money(total)}</span>}
@@ -257,7 +262,13 @@ export default function AdminQuotes() {
                       </div>
                     )}
 
-                    {q.status === 'confirmed' && (
+                    {q.status === 'confirmed' && !q.dealerId && (
+                      <p style={{ marginTop: 12, marginBottom: 0, fontSize: 13, color: '#888' }}>
+                        Bu teklif bir bayiye bağlı olmadığı için cari hesaba işlenemez.
+                      </p>
+                    )}
+
+                    {q.status === 'confirmed' && !!q.dealerId && (
                       q.invoiced ? (
                         <p style={{ marginTop: 12, marginBottom: 0, fontSize: 13, color: '#15803d' }}>
                           ✓ {money(total)} bayinin cari hesabına borç olarak işlendi

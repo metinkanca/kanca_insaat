@@ -96,7 +96,7 @@ header {
   text-decoration: none;
 }
 .header_logo {
-  height: 44px;
+  height: 56px;
   width: auto;
 }
 
@@ -131,7 +131,7 @@ header {
     gap: 8px;
   }
   .header_logo {
-    height: 34px;
+    height: 44px;
   }
   .header_company{
     font-size: 17px;
@@ -156,7 +156,7 @@ header {
     gap: 6px;
   }
   .header_logo {
-    height: 26px;
+    height: 34px;
   }
   .header_company{
     font-size: 14px;
@@ -181,7 +181,7 @@ header {
     gap: 4px;
   }
   .header_logo {
-    height: 20px;
+    height: 26px;
   }
   .header_company{
     font-size: 12px;

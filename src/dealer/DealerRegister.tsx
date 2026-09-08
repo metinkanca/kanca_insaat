@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../firebase';
+import { notifyAdmin } from '../notify';
 
 export default function DealerRegister() {
   const [form, setForm] = useState({
@@ -43,6 +44,19 @@ export default function DealerRegister() {
         address: form.address.trim(),
         status: 'pending',
         createdAt: serverTimestamp(),
+      });
+      notifyAdmin({
+        type: 'dealer',
+        title: `Yeni bayi başvurusu: ${form.companyName.trim()}`,
+        body: [
+          `Firma: ${form.companyName.trim()}`,
+          `E-posta: ${form.email.trim()}`,
+          `Telefon: ${form.phone.trim()}`,
+          form.address.trim() && `Adres: ${form.address.trim()}`,
+          'Onay bekliyor — panelde Bayiler sayfasından onaylayabilirsiniz.',
+        ].filter(Boolean).join('\n'),
+        link: '/admin/dealers',
+        refId: cred.user.uid,
       });
       await auth.signOut();
       setSuccess(true);
