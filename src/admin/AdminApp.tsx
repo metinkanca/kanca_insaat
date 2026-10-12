@@ -16,6 +16,7 @@ import AdminBulkImages from './AdminBulkImages';
 import AdminBrandSwap from './AdminBrandSwap';
 import AdminProductUnit from './AdminProductUnit';
 import AdminHome from './AdminHome';
+import AdminGallery from './AdminGallery';
 import AdminDealers from './AdminDealers';
 import AdminQuotes from './AdminQuotes';
 import AdminQuoteCreate from './AdminQuoteCreate';
@@ -47,6 +48,7 @@ export default function AdminApp() {
           <Route path="products/brand-swap" element={<AdminBrandSwap />} />
           <Route path="products/unit" element={<AdminProductUnit />} />
           <Route path="home" element={<AdminHome />} />
+          <Route path="gallery" element={<AdminGallery />} />
           <Route path="dealers" element={<AdminDealers />} />
           <Route path="quotes" element={<AdminQuotes />} />
           <Route path="quotes/new" element={<AdminQuoteCreate />} />

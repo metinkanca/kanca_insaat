@@ -135,6 +135,7 @@ export default function AdminLayout() {
           {link('/admin', 'Genel Bakış', true)}
           {link('/admin/notifications', 'Bildirimler', true, unread)}
           {link('/admin/home', 'Ana Sayfa')}
+          {link('/admin/gallery', 'Hakkımızda Galerisi')}
           {link('/admin/products', 'Ürünler')}
           {link('/admin/orders', 'Siparişler')}
           {link('/admin/categories', 'Kategoriler')}

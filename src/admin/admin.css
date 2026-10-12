@@ -879,6 +879,20 @@
   border-color: rgba(255,82,82,0.5);
 }
 
+.admin-gallery-grid {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.admin-gallery-item {
+  cursor: default;
+}
+
+.admin-gallery-delete {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+}
+
 .admin-home-gallery-item.selected {
   border-color: rgb(255,82,82);
   background: #fff3f3;

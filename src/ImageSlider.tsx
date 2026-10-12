@@ -84,7 +84,7 @@ export default function ImageSlider({ imageUrls }: ImageSliderProps) {
                                 const actualIndex = startIndex + idx;
                                 return (
                                     <div
-                                        key={url}
+                                        key={actualIndex}
                                         className={`thumbnail ${actualIndex === imageIndex ? 'active' : ''}`}
                                         onClick={() => {
                                             setImageIndex(actualIndex);

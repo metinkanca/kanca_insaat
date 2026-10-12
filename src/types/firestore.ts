@@ -26,6 +26,14 @@ export interface HomeConfig {
   showcaseTiles?: HomeShowcaseTile[];
 }
 
+// One photo an admin added to the Hakkımızda gallery. The 39 original photos
+// ship as static files; these are appended after them, oldest first. Each photo
+// is its own document because the image is inline base64 (1 MB doc limit).
+export interface GalleryImage {
+  img: string;
+  createdAt: any;
+}
+
 export interface BrandGroup {
   brand: string;
   productName: string;
