@@ -8,14 +8,20 @@ export interface Category {
   order: number;
 }
 
-// One tile in the home page showcase grid. Admins pick the tiles (and their
-// order) from the panel; a tile points either at a catalog category or at a
-// single product, and may override the label/image shown on the tile.
+// One button in the home page showcase grid. Admins build the buttons (and
+// their order) in the panel: each has a name, a picture and a destination.
+//   'category' → /products/{slug}                 refId = categories/{id}
+//   'brandAll' → /products?marka={brand}          refId = brand name (every category)
+//   'brand'    → /products/{productType}/{brand}  refId = "{productType}/{brand}"
+//   'product'  → the product's detail page        refId = products/{id}
+//   'link'     → any site path or external URL    refId = "/about", "https://…"
+export type HomeShowcaseKind = 'category' | 'brandAll' | 'brand' | 'product' | 'link';
+
 export interface HomeShowcaseTile {
-  kind: 'category' | 'product';
-  // categories/{id} (slug) for 'category', products/{id} for 'product'.
+  kind: HomeShowcaseKind;
   refId: string;
-  // Blank falls back to the referenced document's own title/image.
+  // Blank falls back to the destination's own title/image ('link' has none,
+  // so its label is required and its image optional).
   label?: string;
   img?: string;
 }

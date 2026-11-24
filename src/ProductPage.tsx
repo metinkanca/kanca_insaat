@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Minus, Plus, ShoppingCart, Check } from 'lucide-react';
 import { db } from './firebase';
 import PageLoader from './PageLoader.tsx';
@@ -29,10 +29,15 @@ export default function Products() {
   const [products, setProducts] = useState<ProductWithId[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [brandFilter, setBrandFilter] = useState('');
+  // ?marka=Daiwa opens the catalog pre-filtered to one brand across every
+  // category — what the home page's brand buttons link to.
+  const [searchParams] = useSearchParams();
+  const brandParam = searchParams.get('marka') || '';
+  const [brandFilter, setBrandFilter] = useState(brandParam);
   const [typeFilter, setTypeFilter] = useState(productType || '');
 
   useEffect(() => { setTypeFilter(productType || ''); }, [productType]);
+  useEffect(() => { setBrandFilter(brandParam); }, [brandParam]);
   const [view, setView] = useState<ViewMode>(() =>
     localStorage.getItem('publicProductView') === 'list' ? 'list' : 'grid'
   );

@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { doc, getDoc, setDoc, collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase';
 import AdminImageUpload from './AdminImageUpload';
-import type { Category, HomeShowcaseTile } from '../types/firestore';
+import AdminShowcaseEditor, {
+  KIND_LABELS, brandOptionsFrom, brandNameOptionsFrom, tileProblem,
+  type CategoryOption, type ProductOption,
+} from './AdminShowcaseEditor';
+import type { HomeShowcaseTile } from '../types/firestore';
 
 interface HomeConfig {
   sliderImages: string[];
@@ -10,16 +14,11 @@ interface HomeConfig {
   showcaseTiles: HomeShowcaseTile[];
 }
 
-type CategoryOption = Category & { id: string };
+const EMPTY_TILE: HomeShowcaseTile = { kind: 'category', refId: '' };
 
-interface ProductOption {
-  id: string;
-  productName: string;
-  img: string;
-  brand: string;
-  productType: string;
-  productCode: string;
-}
+// Firestore caps a document at 1 MiB and uploaded pictures are stored inline
+// as base64, so warn well before the save would be rejected.
+const DOC_WARN_BYTES = 900 * 1024;
 
 const FALLBACK_POPULAR_IDS = [
   'kaloriferli_pelet_sobasi__Daiwa__DP-30F',
@@ -68,8 +67,11 @@ export default function AdminHome() {
   const [categories, setCategories] = useState<CategoryOption[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [search, setSearch] = useState('');
-  const [showcaseTab, setShowcaseTab] = useState<'category' | 'product'>('category');
-  const [showcaseSearch, setShowcaseSearch] = useState('');
+  const [draft, setDraft] = useState<HomeShowcaseTile>(EMPTY_TILE);
+  const [draftError, setDraftError] = useState('');
+  const [editingTile, setEditingTile] = useState<number | null>(null);
+  const [quickTab, setQuickTab] = useState<'category' | 'brandAll' | 'product'>('category');
+  const [quickSearch, setQuickSearch] = useState('');
   const [newImageUrl, setNewImageUrl] = useState('');
   const [showImagePicker, setShowImagePicker] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -119,6 +121,12 @@ export default function AdminHome() {
   }, []);
 
   const save = async () => {
+    const broken = config.showcaseTiles.findIndex(t => tileProblem(t));
+    if (broken !== -1) {
+      setSaveError(`Vitrin butonu ${broken + 1}: ${tileProblem(config.showcaseTiles[broken])}`);
+      setEditingTile(broken);
+      return;
+    }
     setSaving(true);
     setSaveError('');
     try {
@@ -152,18 +160,32 @@ export default function AdminHome() {
   };
 
   // Showcase tile actions
-  const tileKey = (t: HomeShowcaseTile) => `${t.kind}:${t.refId}`;
+  const hasTile = (kind: HomeShowcaseTile['kind'], refId: string) =>
+    config.showcaseTiles.some(t => t.kind === kind && t.refId === refId);
 
-  const toggleTile = (kind: HomeShowcaseTile['kind'], refId: string) =>
+  // Quick picks toggle a plain button (no custom name/picture) for a target.
+  const toggleTile = (kind: HomeShowcaseTile['kind'], refId: string) => {
     setConfig(c => ({
       ...c,
       showcaseTiles: c.showcaseTiles.some(t => t.kind === kind && t.refId === refId)
         ? c.showcaseTiles.filter(t => !(t.kind === kind && t.refId === refId))
         : [...c.showcaseTiles, { kind, refId }],
     }));
+    setEditingTile(null);
+  };
 
-  const removeTile = (i: number) =>
+  const addTile = () => {
+    const problem = tileProblem(draft);
+    if (problem) { setDraftError(problem); return; }
+    setConfig(c => ({ ...c, showcaseTiles: [...c.showcaseTiles, { ...draft, refId: draft.refId.trim() }] }));
+    setDraft({ kind: draft.kind, refId: '' });
+    setDraftError('');
+  };
+
+  const removeTile = (i: number) => {
     setConfig(c => ({ ...c, showcaseTiles: c.showcaseTiles.filter((_, j) => j !== i) }));
+    setEditingTile(null);
+  };
 
   const moveTile = (i: number, dir: -1 | 1) => {
     const arr = [...config.showcaseTiles];
@@ -171,21 +193,12 @@ export default function AdminHome() {
     if (j < 0 || j >= arr.length) return;
     [arr[i], arr[j]] = [arr[j], arr[i]];
     setConfig(c => ({ ...c, showcaseTiles: arr }));
+    if (editingTile === i) setEditingTile(j);
+    else if (editingTile === j) setEditingTile(i);
   };
 
-  // Blank label/image means "use the referenced product or category's own",
-  // so an emptied field is dropped rather than saved as an empty string.
-  const updateTile = (i: number, patch: Partial<HomeShowcaseTile>) =>
-    setConfig(c => ({
-      ...c,
-      showcaseTiles: c.showcaseTiles.map((t, j) => {
-        if (j !== i) return t;
-        const next: HomeShowcaseTile = { ...t, ...patch };
-        if (!next.label) delete next.label;
-        if (!next.img) delete next.img;
-        return next;
-      }),
-    }));
+  const replaceTile = (i: number, next: HomeShowcaseTile) =>
+    setConfig(c => ({ ...c, showcaseTiles: c.showcaseTiles.map((t, j) => (j === i ? next : t)) }));
 
   // Popular product actions
   const toggleProduct = (id: string) =>
@@ -215,32 +228,75 @@ export default function AdminHome() {
       )
     : products;
 
-  // Resolve each tile to the label/image the public grid will actually render.
+  const brands = useMemo(() => brandOptionsFrom(products), [products]);
+  const brandNames = useMemo(() => brandNameOptionsFrom(products), [products]);
+
+  const quickQuery = quickSearch.toLowerCase();
+  const quickItems: { refId: string; name: string; img: string; meta: string }[] =
+    quickTab === 'category'
+      ? categories
+          .filter(c => !quickQuery || (c.title || '').toLowerCase().includes(quickQuery))
+          .map(c => ({ refId: c.id, name: c.title || c.id, img: c.img?.[0] || '', meta: 'Kategori' }))
+      : quickTab === 'brandAll'
+      ? brandNames
+          .filter(b => !quickQuery || b.brand.toLowerCase().includes(quickQuery))
+          .map(b => ({ refId: b.brand, name: b.brand, img: b.img, meta: `Marka · ${b.count} ürün` }))
+      : products
+          .filter(p => !quickQuery ||
+            p.productName.toLowerCase().includes(quickQuery) ||
+            p.brand.toLowerCase().includes(quickQuery) ||
+            p.productCode.toLowerCase().includes(quickQuery))
+          .slice(0, 60)
+          .map(p => ({ refId: p.id, name: p.productName || p.productCode, img: p.img, meta: p.brand }));
+  const categoryTitle = (slug: string) =>
+    categories.find(c => c.id === slug || c.slug === slug)?.title || slug;
+
+  // Resolve each button to the default label/image the public grid falls back
+  // to, plus a one-line description of where it leads.
   const tilePreview = (t: HomeShowcaseTile) => {
+    if (!t.refId) return { title: '', img: '', meta: KIND_LABELS[t.kind], missing: false };
     if (t.kind === 'category') {
       const c = categories.find(x => x.id === t.refId || x.slug === t.refId);
-      return { title: c?.title || t.refId, img: c?.img?.[0] || '', meta: 'Kategori', missing: !c };
+      return {
+        title: c?.title || t.refId,
+        img: c?.img?.[0] || '',
+        meta: `Kategori · /products/${c?.slug || t.refId}`,
+        missing: categories.length > 0 && !c,
+      };
     }
-    const p = products.find(x => x.id === t.refId);
-    return {
-      title: p?.productName || p?.productCode || t.refId,
-      img: p?.img || '',
-      meta: p?.brand ? `Ürün · ${p.brand}` : 'Ürün',
-      missing: !p,
-    };
+    if (t.kind === 'brandAll') {
+      const b = brandNames.find(x => x.brand === t.refId);
+      return {
+        title: t.refId,
+        img: b?.img || '',
+        meta: `Marka · tüm ürünleri (/products?marka=${t.refId})`,
+        missing: !loadingProducts && !b,
+      };
+    }
+    if (t.kind === 'brand') {
+      const b = brands.find(x => x.ref === t.refId);
+      const [type, brand] = t.refId.split('/');
+      const catTitle = categoryTitle(type);
+      return {
+        title: catTitle !== type ? `${brand} ${catTitle}` : brand,
+        img: b?.img || '',
+        meta: `Marka · ${brand} / ${catTitle}`,
+        missing: !loadingProducts && !b,
+      };
+    }
+    if (t.kind === 'product') {
+      const p = products.find(x => x.id === t.refId);
+      return {
+        title: p?.productName || p?.productCode || t.refId,
+        img: p?.img || '',
+        meta: p?.brand ? `Ürün · ${p.brand} · ${p.productCode}` : 'Ürün',
+        missing: !loadingProducts && !p,
+      };
+    }
+    return { title: '', img: '', meta: `Bağlantı · ${t.refId}`, missing: false };
   };
 
-  const showcaseQuery = showcaseSearch.toLowerCase();
-  const showcaseCategories = showcaseQuery
-    ? categories.filter(c => (c.title || '').toLowerCase().includes(showcaseQuery))
-    : categories;
-  const showcaseProducts = showcaseQuery
-    ? products.filter(p =>
-        p.productName.toLowerCase().includes(showcaseQuery) ||
-        p.brand.toLowerCase().includes(showcaseQuery) ||
-        p.productCode.toLowerCase().includes(showcaseQuery)
-      )
-    : products;
+  const configBytes = useMemo(() => new Blob([JSON.stringify(config)]).size, [config]);
 
   const popularProducts = config.popularProductIds
     .map(id => products.find(p => p.id === id))
@@ -329,137 +385,155 @@ export default function AdminHome() {
       <div className="admin-home-section">
         <h3 className="admin-home-section-title">Ana Sayfa Vitrini</h3>
         <p className="admin-home-section-hint">
-          Ana sayfanın en üstündeki kutucuk ızgarası. Kategori veya ürün seçin; sıra buradaki
-          sıralamayla aynıdır. Hiç seçim yapılmazsa ilk 12 kategori otomatik gösterilir.
+          Ana sayfanın en üstündeki butonlar. Her butonun adını, görselini ve tıklanınca nereye
+          gideceğini (kategori, marka sayfası, ürün veya özel bağlantı) siz belirlersiniz. Butonlar
+          ekrana sığdığı kadar yan yana dizilir, sığmayanlar alt satıra geçer; sıra buradaki
+          sıralamayla aynıdır. Hiç buton yoksa ilk 12 kategori otomatik gösterilir.
         </p>
 
-        {/* Currently selected tiles */}
+        {/* Existing buttons */}
         {config.showcaseTiles.length === 0 ? (
-          <p className="admin-empty">Henüz kutucuk eklenmedi — aşağıdan seçin.</p>
+          <p className="admin-empty">Henüz buton eklenmedi — aşağıdaki formdan oluşturun.</p>
         ) : (
           <div className="admin-home-popular-list">
             {config.showcaseTiles.map((t, i) => {
               const preview = tilePreview(t);
+              const img = t.img || preview.img;
+              const editing = editingTile === i;
+              const problem = tileProblem(t);
               return (
-                <div key={`${tileKey(t)}-${i}`} className="admin-home-tile-row">
+                <div key={i} className={`admin-home-tile-row${editing ? ' editing' : ''}`}>
                   <div className="admin-home-tile-main">
-                    {(t.img || preview.img)
-                      ? <img src={t.img || preview.img} className="admin-home-thumb" alt="" />
+                    {img
+                      ? <img src={img} className="admin-home-thumb" alt="" />
                       : <div className="admin-home-thumb admin-home-pick-placeholder" />
                     }
                     <div className="admin-home-popular-info">
                       <span className="admin-home-popular-name">
-                        {t.label || preview.title}
-                        {preview.missing && <span className="admin-home-tile-missing"> (bulunamadı)</span>}
+                        {t.label || preview.title || '(adsız)'}
+                        {preview.missing && <span className="admin-home-tile-missing"> (hedef bulunamadı)</span>}
+                        {problem && <span className="admin-home-tile-missing"> ({problem})</span>}
                       </span>
                       <span className="admin-home-popular-meta">{preview.meta}</span>
                     </div>
                     <div className="admin-actions">
                       <button className="admin-btn admin-btn-sm" onClick={() => moveTile(i, -1)} disabled={i === 0}>↑</button>
                       <button className="admin-btn admin-btn-sm" onClick={() => moveTile(i, 1)} disabled={i === config.showcaseTiles.length - 1}>↓</button>
-                      <button className="admin-btn admin-btn-sm admin-btn-danger" onClick={() => removeTile(i)}>Çıkar</button>
+                      <button
+                        className={`admin-btn admin-btn-sm${editing ? ' admin-btn-primary' : ''}`}
+                        onClick={() => setEditingTile(editing ? null : i)}
+                      >
+                        {editing ? 'Bitti' : 'Düzenle'}
+                      </button>
+                      <button className="admin-btn admin-btn-sm admin-btn-danger" onClick={() => removeTile(i)}>Sil</button>
                     </div>
                   </div>
-                  <div className="admin-home-tile-overrides">
-                    <input
-                      value={t.label ?? ''}
-                      onChange={e => updateTile(i, { label: e.target.value })}
-                      placeholder={`Başlık (boş = ${preview.title})`}
+                  {editing && (
+                    <AdminShowcaseEditor
+                      value={t}
+                      onChange={next => replaceTile(i, next)}
+                      categories={categories}
+                      brands={brands}
+                      brandNames={brandNames}
+                      products={products}
+                      loadingProducts={loadingProducts}
+                      defaultLabel={preview.title}
                     />
-                    <input
-                      value={t.img ?? ''}
-                      onChange={e => updateTile(i, { img: e.target.value })}
-                      placeholder="Görsel URL (boş = varsayılan görsel)"
-                    />
-                    <AdminImageUpload folder="showcase" onUploaded={url => updateTile(i, { img: url })} label="Görsel Yükle" />
-                  </div>
+                  )}
                 </div>
               );
             })}
           </div>
         )}
 
-        {/* Tile picker */}
-        <div className="admin-home-picker">
+        {/* Quick picks — one click adds a ready-made button (click again to remove) */}
+        <div className="admin-showcase-new">
+          <p className="admin-home-picker-group-label" style={{ marginTop: 0 }}>Hızlı Ekle</p>
           <div className="admin-home-tabs">
-            <button
-              className={`admin-btn admin-btn-sm${showcaseTab === 'category' ? ' admin-btn-primary' : ''}`}
-              onClick={() => setShowcaseTab('category')}
-            >
-              Kategoriler
-            </button>
-            <button
-              className={`admin-btn admin-btn-sm${showcaseTab === 'product' ? ' admin-btn-primary' : ''}`}
-              onClick={() => setShowcaseTab('product')}
-            >
-              Ürünler
-            </button>
+            {([
+              ['category', 'Kategoriler'],
+              ['brandAll', 'Markalar'],
+              ['product', 'Ürünler'],
+            ] as const).map(([tab, label]) => (
+              <button
+                key={tab}
+                className={`admin-btn admin-btn-sm${quickTab === tab ? ' admin-btn-primary' : ''}`}
+                onClick={() => setQuickTab(tab)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
 
           <input
             className="admin-search"
             style={{ maxWidth: '100%', margin: '12px 0' }}
-            value={showcaseSearch}
-            onChange={e => setShowcaseSearch(e.target.value)}
-            placeholder={showcaseTab === 'category' ? 'Kategori ara...' : 'Ürün ara (ad, marka, kod)...'}
+            value={quickSearch}
+            onChange={e => setQuickSearch(e.target.value)}
+            placeholder={
+              quickTab === 'category' ? 'Kategori ara...'
+                : quickTab === 'brandAll' ? 'Marka ara...'
+                : 'Ürün ara (ad, marka, kod)...'
+            }
           />
 
-          {showcaseTab === 'category' ? (
-            categories.length === 0 ? (
-              <p style={{ color: '#888', fontSize: 13 }}>Kategori bulunamadı.</p>
-            ) : (
-              <div className="admin-home-product-grid">
-                {showcaseCategories.map(c => {
-                  const selected = config.showcaseTiles.some(t => t.kind === 'category' && t.refId === c.id);
-                  return (
-                    <div
-                      key={c.id}
-                      className={`admin-home-product-item${selected ? ' selected' : ''}`}
-                      onClick={() => toggleTile('category', c.id)}
-                    >
-                      {selected && <span className="admin-home-pick-check">✓</span>}
-                      {c.img?.[0]
-                        ? <img src={c.img[0]} className="admin-home-pick-thumb" alt="" />
-                        : <div className="admin-home-pick-thumb admin-home-pick-placeholder" />
-                      }
-                      <span className="admin-home-pick-name">{c.title || c.id}</span>
-                      <span className="admin-home-pick-meta">Kategori</span>
-                    </div>
-                  );
-                })}
-                {showcaseCategories.length === 0 && (
-                  <p className="admin-empty" style={{ gridColumn: '1/-1' }}>Aramanızla eşleşen kategori yok.</p>
-                )}
-              </div>
-            )
-          ) : loadingProducts ? (
-            <p style={{ color: '#888', fontSize: 13 }}>Ürünler yükleniyor...</p>
+          {quickTab !== 'category' && loadingProducts ? (
+            <p style={{ color: '#888', fontSize: 13 }}>Yükleniyor...</p>
+          ) : quickItems.length === 0 ? (
+            <p className="admin-empty">Aramanızla eşleşen sonuç yok.</p>
           ) : (
             <div className="admin-home-product-grid">
-              {showcaseProducts.slice(0, 60).map(p => {
-                const selected = config.showcaseTiles.some(t => t.kind === 'product' && t.refId === p.id);
+              {quickItems.map(item => {
+                const selected = hasTile(quickTab, item.refId);
                 return (
                   <div
-                    key={p.id}
+                    key={item.refId}
                     className={`admin-home-product-item${selected ? ' selected' : ''}`}
-                    onClick={() => toggleTile('product', p.id)}
+                    onClick={() => toggleTile(quickTab, item.refId)}
                   >
                     {selected && <span className="admin-home-pick-check">✓</span>}
-                    {p.img
-                      ? <img src={p.img} className="admin-home-pick-thumb" alt="" />
+                    {item.img
+                      ? <img src={item.img} className="admin-home-pick-thumb" alt="" />
                       : <div className="admin-home-pick-thumb admin-home-pick-placeholder" />
                     }
-                    <span className="admin-home-pick-name">{p.productName || p.productCode}</span>
-                    <span className="admin-home-pick-meta">{p.brand}</span>
+                    <span className="admin-home-pick-name">{item.name}</span>
+                    <span className="admin-home-pick-meta">{item.meta}</span>
                   </div>
                 );
               })}
-              {showcaseProducts.length === 0 && (
-                <p className="admin-empty" style={{ gridColumn: '1/-1' }}>Aramanızla eşleşen ürün yok.</p>
-              )}
             </div>
           )}
         </div>
+
+        {/* New button form */}
+        <div className="admin-showcase-new">
+          <p className="admin-home-picker-group-label" style={{ marginTop: 0 }}>Özel Buton Oluştur</p>
+          <AdminShowcaseEditor
+            value={draft}
+            onChange={next => { setDraft(next); setDraftError(''); }}
+            categories={categories}
+            brands={brands}
+            brandNames={brandNames}
+            products={products}
+            loadingProducts={loadingProducts}
+            defaultLabel={tilePreview(draft).title}
+          />
+          <div className="admin-showcase-new-actions">
+            {draftError && <span className="admin-error" style={{ margin: 0, fontSize: 12 }}>{draftError}</span>}
+            <button className="admin-btn admin-btn-primary" onClick={addTile}>+ Butonu Ekle</button>
+          </div>
+        </div>
+
+        {configBytes > DOC_WARN_BYTES && (
+          <p className="admin-error" style={{ fontSize: 12.5 }}>
+            Ana sayfa ayarları {(configBytes / 1024).toFixed(0)} KB'a ulaştı (sınır 1024 KB). Cihazdan
+            yüklenen görseller ayarların içinde saklanır — bazılarını kaldırın veya URL ile verin,
+            yoksa kayıt reddedilir.
+          </p>
+        )}
+        <p className="admin-home-section-hint" style={{ margin: '12px 0 0' }}>
+          Değişiklikler sayfanın üstündeki <strong>Kaydet</strong> ile yayına alınır.
+        </p>
       </div>
 
       {/* ── Popular products ── */}

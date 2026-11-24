@@ -2921,46 +2921,25 @@ header {
 }
 
 
-/* Showcase strip — a continuously scrolling single line of category/product
-   tiles picked in the admin panel. No controls: it just drifts, and pauses
-   under the cursor so a moving tile is still easy to click. */
+/* Showcase grid — the admin-built buttons (category, brand, product or custom
+   link), laid out centred and wrapping onto as many rows as they need. */
 .home-showcase {
   background: #e7e7e7;
   padding: 40px 0 42px;
 }
 
-.home-marquee {
-  overflow: hidden;
-  /* Feather both ends so tiles dissolve into the background rather than
-     being sliced off at the viewport edge. */
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
-}
-
-.home-marquee-track {
+.home-showcase-grid {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: flex-start;
-  gap: 30px;
-  width: max-content;
-  padding: 4px 0;
-  will-change: transform;
-  animation-name: home-marquee-scroll;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  gap: 26px 30px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 4px 28px;
 }
 
-@keyframes home-marquee-scroll {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(var(--marquee-shift), 0, 0); }
-}
-
-/* Hovering anywhere on the strip holds it still — the whole row, not just
-   the tile under the cursor, so neighbours stay where the eye left them. */
-.home-marquee:hover .home-marquee-track {
-  animation-play-state: paused;
-}
-
-.home-marquee-item {
+.home-showcase-item {
   flex: 0 0 auto;
   width: 190px;
   display: flex;
@@ -2971,11 +2950,11 @@ header {
   transition: transform 0.25s ease;
 }
 
-.home-marquee-item:hover {
+.home-showcase-item:hover {
   transform: translateY(-4px);
 }
 
-.home-marquee-img {
+.home-showcase-img {
   position: relative;
   display: block;
   width: 100%;
@@ -2988,7 +2967,7 @@ header {
 }
 
 /* Grounding shadow under the product. */
-.home-marquee-img::after {
+.home-showcase-img::after {
   content: '';
   position: absolute;
   left: 22%;
@@ -3001,11 +2980,11 @@ header {
   transition: opacity 0.25s ease;
 }
 
-.home-marquee-item:hover .home-marquee-img::after {
+.home-showcase-item:hover .home-showcase-img::after {
   opacity: 1;
 }
 
-.home-marquee-img img {
+.home-showcase-img img {
   position: relative;
   z-index: 1;
   width: 100%;
@@ -3016,11 +2995,11 @@ header {
   transition: transform 0.3s ease;
 }
 
-.home-marquee-item:hover .home-marquee-img img {
+.home-showcase-item:hover .home-showcase-img img {
   transform: scale(1.06);
 }
 
-.home-marquee-label {
+.home-showcase-label {
   /* Two-line box keeps every label block the same height, so tiles with a
      long name do not sit lower than their neighbours. */
   display: flex;
@@ -3037,27 +3016,23 @@ header {
   transition: color 0.25s ease;
 }
 
-.home-marquee-item:hover .home-marquee-label {
+.home-showcase-item:hover .home-showcase-label {
   color: var(--red);
 }
 
 /* Loading placeholders — same box model as a real tile so the section
-   reserves its final height on first paint instead of popping in. */
-.home-marquee-track--static {
-  animation: none;
-}
-
-.home-marquee-item--skeleton {
+   reserves its height on first paint instead of popping in. */
+.home-showcase-item--skeleton {
   pointer-events: none;
 }
 
-.home-marquee-item--skeleton .home-marquee-img,
-.home-marquee-item--skeleton .home-marquee-label {
+.home-showcase-item--skeleton .home-showcase-img,
+.home-showcase-item--skeleton .home-showcase-label {
   background: #dedede;
-  animation: home-marquee-pulse 1.4s ease-in-out infinite;
+  animation: home-showcase-pulse 1.4s ease-in-out infinite;
 }
 
-.home-marquee-item--skeleton .home-marquee-label {
+.home-showcase-item--skeleton .home-showcase-label {
   width: 72%;
   min-height: 11px;
   height: 11px;
@@ -3065,25 +3040,14 @@ header {
   margin-top: 5px;
 }
 
-@keyframes home-marquee-pulse {
+@keyframes home-showcase-pulse {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.5; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-marquee-item--skeleton .home-marquee-img,
-  .home-marquee-item--skeleton .home-marquee-label {
-    animation: none;
-  }
-}
-
-/* Respect a reduced-motion preference: the strip stops and simply scrolls. */
-@media (prefers-reduced-motion: reduce) {
-  .home-marquee {
-    overflow-x: auto;
-  }
-
-  .home-marquee-track {
+  .home-showcase-item--skeleton .home-showcase-img,
+  .home-showcase-item--skeleton .home-showcase-label {
     animation: none;
   }
 }
@@ -3331,19 +3295,20 @@ header {
     padding: 22px 0 24px;
   }
 
-  .home-marquee-track {
+  .home-showcase-grid {
     gap: 18px;
+    padding: 4px 16px;
   }
 
-  .home-marquee-item {
+  .home-showcase-item {
     width: 132px;
   }
 
-  .home-marquee-img img {
+  .home-showcase-img img {
     padding: 12px 12px 15px;
   }
 
-  .home-marquee-label {
+  .home-showcase-label {
     min-height: 28px;
     font-size: 10px;
     letter-spacing: 0.05em;
@@ -3412,11 +3377,17 @@ header {
     height: 46px;
   }
 
-  .home-marquee-item {
-    width: 116px;
+  /* Three buttons per row on phones, whatever the exact screen width. */
+  .home-showcase-grid {
+    gap: 16px 12px;
+    padding: 4px 12px;
   }
 
-  .home-marquee-img {
+  .home-showcase-item {
+    width: calc((100% - 24px) / 3);
+  }
+
+  .home-showcase-img {
     border-radius: 10px;
   }
 
